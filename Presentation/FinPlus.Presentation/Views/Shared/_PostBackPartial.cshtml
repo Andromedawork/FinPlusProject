@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Postback</title>
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .form-inline {
+            display: flex;
+            align-items: center;
+        }
+
+            .form-inline label {
+                margin-right: 10px;
+            }
+
+            .form-inline select,
+            .form-inline input {
+                margin-right: 10px;
+            }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="header">
+            <h1 class="font-weight-bold">Постбэк</h1>
+            <form class="form-inline" id="addOfferForm">
+                <label for="offer">Оффер:</label>
+                <select id="offer" class="form-control" required>
+                    <option value="alfa-ip">Альфа ИП</option>
+                    <option value="credit-svoi">Кредит Свой</option>
+                    <option value="credit-vtb">Кредит ВТБ</option>
+                    <!-- Добавьте другие варианты офферов здесь -->
+                </select>
+                <label for="date">Дата:</label>
+                <input type="date" id="date" class="form-control" required>
+                <label for="time">Время:</label>
+                <input type="time" id="time" class="form-control" required>
+                <label for="status">Статус:</label>
+                <select id="status" class="form-control" required>
+                    <option value="Ожидает">Ожидает</option>
+                    <option value="Одобрено">Одобрено</option>
+                    <option value="Отклонено">Отклонено</option>
+                    <option value="Отказано">Отказано</option>
+                    <option value="Получено">Получено</option>
+                    <option value="ЦД сделано">ЦД сделано</option>
+                </select>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Оффер</th>
+                    <th>Дата</th>
+                    <th>Время</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody id="offersTableBody">
+                <!-- Пример строки в таблице -->
+                <tr>
+                    <td>Альфа ИП</td>
+                    <td>2024-06-27</td>
+                    <td>14:30</td>
+                    <td>Ожидает</td>
+                </tr>
+                <!-- Новые строки будут добавляться сюда -->
+            </tbody>
+        </table>
+    </div>
+    <script>
+        document.getElementById('addOfferForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var offer = document.getElementById('offer').value;
+            var date = document.getElementById('date').value;
+            var time = document.getElementById('time').value;
+            var status = document.getElementById('status').value;
+
+            var tableBody = document.getElementById('offersTableBody');
+            var newRow = document.createElement('tr');
+
+            var offerCell = document.createElement('td');
+            offerCell.textContent = offer;
+            newRow.appendChild(offerCell);
+
+            var dateCell = document.createElement('td');
+            dateCell.textContent = date;
+            newRow.appendChild(dateCell);
+
+            var timeCell = document.createElement('td');
+            timeCell.textContent = time;
+            newRow.appendChild(timeCell);
+
+            var statusCell = document.createElement('td');
+            statusCell.textContent = status;
+            newRow.appendChild(statusCell);
+
+            tableBody.appendChild(newRow);
+
+            // Очистить форму
+            document.getElementById('addOfferForm').reset();
+        });
+    </script>
+</body>
+</html>

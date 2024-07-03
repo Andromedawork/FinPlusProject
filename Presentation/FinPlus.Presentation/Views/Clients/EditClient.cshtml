@@ -1,0 +1,148 @@
+﻿@model FinPlus.Presentation.Models.DropModel
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Данные клиента</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css" integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="~/css/selectize.css" />
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4" style="border-bottom: 2px solid;">Данные клиента</h1>
+        <form asp-action="AddClient" method="post">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">ФИО</label>
+                <input asp-for="Name" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Source" class="form-label">Источник</label>
+                <input asp-for="Source" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Partner" class="form-label">Партнер</label>
+                <input asp-for="Partner" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="SubPartner" class="form-label">СубПартнер</label>
+                <input asp-for="SubPartner" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="MobileNumber" class="form-label">Номер телефона</label>
+                <input type="tel" class="form-control phone" asp-for="MobileNumber" required />
+            </div>
+                <div class="mb-3">
+                    <label asp-for="Telegram" class="form-label">Telegram</label>
+                    <input asp-for="Telegram" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Pass" class="form-label">Паспортные данные</label>
+                    <input asp-for="Pass" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label asp-for="DateOfBirth" class="form-label">Дата рождения</label>
+                    <input asp-for="DateOfBirth" type="date" class="form-control" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+
+        <div class="container mt-5">
+            <h2 class="mb-4" style="border-bottom: 2px solid;">Первый контакт</h2>
+            <form asp-action="FirstContact" method="post">
+                <div class="mb-3">
+                    <div class="control-group">
+                        <label for="select-state">Офферы:</label>
+                        <select id="select-state" multiple name="state[]" class="demo-default" disabled>
+                            <option value="">Выберите офферы</option>
+                            <option value="credit-svoi" selected>Кредит УралСиб</option>
+                            <option value="alfa-ip">Альфа ИП</option>
+                            <option value="credit-vtb" selected>Кредит ВТБ</option>
+                            <option value="credit-tinkoff" selected>Кредит Тинькофф</option>
+                            <option value="rko">РКО</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Заметки</label>
+                    <textarea class="form-control" rows="4" disabled></textarea>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="container mt-5">
+            <h2 class="mb-4" style="border-bottom: 2px solid;">Второй контакт</h2>
+            <form asp-action="ЫусщтвContact" method="post">
+                <div class="mb-3">
+                    <div class="control-group">
+                        <label for="select-state-second">Офферы оформленные:</label>
+                        <select id="select-state-second" multiple name="state[]" class="demo-default">
+                            <option value="">Выберите офферы</option>
+                            <option value="credit-svoi">Кредит УралСиб</option>
+                            <option value="alfa-ip">Альфа ИП</option>
+                            <option value="credit-vtb">Кредит ВТБ</option>
+                            <option value="credit-tinkoff">Кредит Тинькофф</option>
+                            <option value="rko">РКО</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Заметки</label>
+                    <textarea class="form-control" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </form>
+        </div>
+
+        <div class="container mt-5">
+            <h2 class="mb-4" style="border-bottom: 2px solid;">Третий контакт</h2>
+            <form asp-action="ThirdContact" method="post">
+                <div class="mb-3">
+                    <div class="control-group">
+                        <label for="select-state-third">Офферы оформленные:</label>
+                        <select id="select-state-third" multiple name="state[]" class="demo-default">
+                            <option value="">Выберите офферы</option>
+                            <option value="credit-svoi">Кредит УралСиб</option>
+                            <option value="alfa-ip">Альфа ИП</option>
+                            <option value="credit-vtb">Кредит ВТБ</option>
+                            <option value="credit-tinkoff">Кредит Тинькофф</option>
+                            <option value="rko">РКО</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="control-group">
+                        <label for="select-state-fourthy">Выплачено за офферы:</label>
+                        <select id="select-state-fourthy" multiple name="state[]" class="demo-default">
+                            <option value="">Выберите офферы</option>
+                            <option value="credit-svoi">Кредит УралСиб</option>
+                            <option value="alfa-ip">Альфа ИП</option>
+                            <option value="credit-vtb">Кредит ВТБ</option>
+                            <option value="credit-tinkoff">Кредит Тинькофф</option>
+                            <option value="rko">РКО</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Заметки</label>
+                    <textarea class="form-control" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Сохранить</button>
+            </form>
+        </div>
+
+        @await Html.PartialAsync("_PostBackPartial")
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js" integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/js/selectize.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+

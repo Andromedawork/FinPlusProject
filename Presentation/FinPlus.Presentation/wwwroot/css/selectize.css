@@ -1,0 +1,8 @@
+﻿.selectize-control .item {
+    background-image: linear-gradient(to bottom, #D9D9D9, #D9D9D9) !important;
+    color: #000000 !important;
+}
+
+.selectize-control.multi .selectize-input > div {
+    border: none !important;
+}

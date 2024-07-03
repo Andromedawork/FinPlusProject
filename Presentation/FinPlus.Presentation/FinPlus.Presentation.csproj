@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Domain\FinPlus.Domain\FinPlus.Domain.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\FinPlus.Infrastructure\FinPlus.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Services\FinPlusService\FinPlusService.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+	<CodeAnalysisRuleSet>../../common.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.556" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вход</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header text-center">
+                        Вход
+                    </div>
+                    <div class="card-body">
+                        <form asp-controller="Auth" asp-action="Entrance" method="post">
+                            <div class="form-group row align-items-center">
+                                <div class="col">
+                                    <div class="form-floating mb-3">
+                                        <input type="textl" class="form-control" id="login" name="login" placeholder="Логин">
+                                        <label for="floatingInput">Логин</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+                                    <label for="floatingInput">Пароль</label>
+                                </div>
+                            </div>
+                            <button id="registerButton" type="submit" class="btn btn-outline-primary" disabled>Войти</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

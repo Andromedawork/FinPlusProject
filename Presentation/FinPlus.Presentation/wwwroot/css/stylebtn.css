@@ -1,0 +1,41 @@
+﻿.btn-edit {
+    border: none;
+    background: none;
+    color: gray;
+    cursor: pointer;
+    padding: 0;
+}
+
+    .btn-edit:hover {
+        text-decoration: underline;
+    }
+
+.btn-add {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #007bff; /* Цвет ссылки Bootstrap */
+    cursor: pointer;
+}
+
+    .btn-add:hover {
+        text-decoration: underline;
+    }
+
+.openbtn {
+    height: 100%;
+    width: 56px;
+    top: 0;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #011547;
+    color: white;
+    padding: 0;
+    border: none;
+    position: fixed;
+    z-index: 3;
+}
+
+    .openbtn:hover {
+        background-color: #0056b3;
+    }

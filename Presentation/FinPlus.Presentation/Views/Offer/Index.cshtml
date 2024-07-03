@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список Офферов</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styletable.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/stylebtn.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Список Офферов</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Тип</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Прибыль</th>
+                    <th scope="col">Целевое действие</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var offer in Model)
+                {
+                    <tr>
+                        <td>@offer.Type</td>
+                        <td>@offer.Name</td>
+                        <td>@offer.Profit</td>
+                        <td>@offer.TargetAction</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a class="nav-link text-secondary" asp-controller="Offer" asp-action="AddOffer">Добавить+</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

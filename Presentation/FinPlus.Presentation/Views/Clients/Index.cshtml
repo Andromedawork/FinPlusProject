@@ -1,0 +1,63 @@
+﻿@using FinPlus.Presentation.Models;
+@model List<DropModel>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Клиенты</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styletable.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/stylebtn.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">Клиенты</div>
+        <div class="search-form">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+                <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Найти</button>
+            </form>
+        </div>
+        <div class="table-container">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Источник</th>
+                        <th>Рефовод</th>
+                        <th>ФИО</th>
+                        <th>Телефон</th>
+                        <th>Прибыль потенциальная</th>
+                        <th>Прибыль в холде</th>
+                        <th>Дата</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                   @foreach(var drop in Model)
+                   {
+                        <tr>
+                            <td>@drop.Id</td>
+                            <td>@drop.Source</td>
+                            <td>@drop.Partner</td>
+                            <td>@drop.Name</td>
+                            <td>@drop.MobileNumber</td>
+                            <td>@drop.ProfitPotencial</td>
+                            <td>@drop.RevenuePotential</td>
+                            <td>@drop.Date</td>
+                            <td>
+                                <a class="nav-link text-secondary" asp-controller="Clients" asp-action="EditClient" asp-route-id="@drop.Id">Ред.</a>
+                            </td>
+                        </tr>
+                   }
+                </tbody>
+            </table>
+            <a class="nav-link text-secondary" asp-controller="Clients" asp-action="EditClient" //asp-route-id="@drop.Id">Ред.</a>
+            <a class="nav-link text-secondary" asp-controller="Clients" asp-action="AddClient">Добавить+</a>
+        </div>
+    </div>
+</body>
+</html>

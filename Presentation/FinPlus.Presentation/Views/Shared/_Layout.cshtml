@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - FinPlus.Presentation</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/stylenavpanel.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/stylebtn.css" asp-append-version="true" />
+</head>
+<body>
+    <div id="sidebarMenu" class="sidebar">
+        <a class="nav-link" asp-area="" asp-controller="Clients" asp-action="Index">Клиенты</a>
+        <a class="nav-link" asp-area="" asp-controller="Trafer" asp-action="Index">Траферы</a>
+        <a class="nav-link" asp-area="" asp-controller="Sources" asp-action="Index">Источники</a>
+        <a class="nav-link" asp-area="" asp-controller="Finances" asp-action="Index">Финансы</a>
+        <a class="nav-link" asp-area="" asp-controller="Offer" asp-action="Index">Офферы</a>
+        <a class="nav-link" asp-area="" asp-controller="Calendar" asp-action="Index">Календарь</a>
+    </div>
+
+    <div id="main">
+        <button class="openbtn" onclick="toggleNav()">&#9776;</button>
+        <div class="overlay" id="overlay" onclick="toggleNav()"></div>
+        <main class="content">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/sciptnavpanel.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
