@@ -90,26 +90,36 @@
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> EditTrafer(TraferModel model)
+        public async Task<IActionResult> EditTrafer(string id)
         {
-            Traffer traffer = new Traffer()
-            {
-                Id = model.Id,
-                Name = model.Name,
-                Login = model.Login,
-                Password = model.Password,
-                ReferalId = model.ReferalId,
-                MobileNumber = model.MobileNumber,
-                Level = model.Level,
-                Bet = model.Bet,
-            };
+            var traffer = await _trafferService.GetTrafferById(id);
+            return View(traffer);
+        }
 
-            if (await _trafferService.UpdateTraffer(traffer))
+        [HttpPost]
+        public async Task<IActionResult> UpdateTraffer(Traffer traffer, string name)
+        {
+            if (ModelState.IsValid)
             {
-                return View(model);
+                var parts = name.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+                if (parts.Length < 2)
+                {
+                    return BadRequest("Введите полное ФИО");
+                }
+
+                var fio = new FIO
+                {
+                    Surname = parts[0],
+                    Name = parts[1],
+                    Patronymic = parts.Length > 2 ? parts[2] : string.Empty,
+                };
+                traffer.Name = fio;
+                await _trafferService.UpdateTraffer(traffer);
+                return RedirectToAction("Index");
             }
 
-            return View(model);
+            return View("EditTraffer", traffer);
         }
     }
 }

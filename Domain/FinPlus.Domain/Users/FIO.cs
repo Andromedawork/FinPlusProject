@@ -7,5 +7,10 @@
         public string Name { get; set; }
 
         public string Patronymic { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Surname} {Name} {Patronymic}";
+        }
     }
 }

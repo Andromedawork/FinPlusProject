@@ -1,5 +1,5 @@
-﻿@using FinPlus.Presentation.Models;
-@model TraferModel
+﻿@using FinPlus.Domain.Users.Trafer
+@model Traffer
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -12,14 +12,21 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4" style="border-bottom: 2px solid;">Редактировать Трафера</h1>
-        <form asp-action="EditTrafer" method="post">
+        <form asp-action="UpdateTraffer" method="post">
             <div class="mb-3">
-                <label asp-for="Name" class="form-label">Имя</label>
-                <input asp-for="Name" class="form-control" required />
+                <input asp-for="Id" class="form-control" required hidden />
+            </div>
+            <div class="mb-3">
+                <label id="name" class="form-label">ФИО</label>
+                <input id="name" name="name" class="form-control" value="@Model.Name.ToString()" required />
             </div>
             <div class="mb-3">
                 <label asp-for="Login" class="form-label">Логин</label>
                 <input asp-for="Login" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label">Пароль</label>
+                <input asp-for="Password" class="form-control" required hidden />
             </div>
             <div class="mb-3">
                 <label asp-for="ReferalId" class="form-label">Referal ID</label>
@@ -27,7 +34,7 @@
             </div>
             <div class="mb-3">
                 <label asp-for="MobileNumber" class="form-label">Номер телефона</label>
-                <input type="tel" class="form-control phone" id="mobileNumber" name="mobileNumber" placeholder="Номер телефона" asp-for="MobileNumber" required />
+                <input type="tel" class="form-control phone" id="mobileNumber" asp-for="MobileNumber" placeholder="Номер телефона" required />
             </div>
             <div class="mb-3">
                 <label asp-for="Level" class="form-label">Уровень</label>

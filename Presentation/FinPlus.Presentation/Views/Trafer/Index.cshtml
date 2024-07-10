@@ -38,19 +38,18 @@
                     {
                         <tr>
                         <td>@trafer.ReferalId</td>
-                        <td>@trafer.Name</td>
+                        <td>@trafer.Name.ToString()</td>
                         <td>@trafer.MyDrops.Count()</td>
                         <td>@trafer.Revenue</td>
                         <td>@trafer.ProfitInMonth</td>
                         <td>
-                            <a class="nav-link text-secondary" asp-controller="Trafer" asp-action="Edit" asp-route-id="@trafer.Id">Ред.</a>
+                            <a class="nav-link text-secondary" asp-controller="Trafer" asp-action="EditTrafer" asp-route-id="@trafer.Id">Ред.</a>
                         </td>
                         </tr>
                     }
                 </tbody>
             </table>
             <a class="nav-link text-secondary" asp-controller="Trafer" asp-action="AddTrafer">Добавить+</a>
-            <a class="nav-link text-secondary" asp-controller="Trafer" asp-action="EditTrafer" //asp-route-id="@trafer.Id">Ред.</a>
         </div>
     </div>
 </body>

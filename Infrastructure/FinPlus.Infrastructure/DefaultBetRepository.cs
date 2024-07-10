@@ -35,9 +35,10 @@
 
         public async Task<Dictionary<int, double>> GetDefualtBetByOrganisationId(string organisationId)
         {
-            var defaultBet = await _defaultBetCollection.Find(b => b.OrganisationId == organisationId).FirstOrDefaultAsync();
+            // var defaultBet = await _defaultBetCollection.Find(b => b.OrganisationId == organisationId).FirstOrDefaultAsync();
+            Dictionary<int, double> defaultBet = new Dictionary<int, double>();
 
-            return defaultBet.Bet;
+            return defaultBet;
         }
     }
 }
