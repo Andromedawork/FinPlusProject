@@ -23,6 +23,7 @@
 
         public async Task AddTraffer(Traffer trafer)
         {
+            trafer.Password = BCrypt.Net.BCrypt.HashPassword(trafer.Password);
             await _trafferRepository.AddTraffer(trafer);
         }
 

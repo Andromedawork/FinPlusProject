@@ -8,6 +8,7 @@ using FinPlus.Infrastructure;
 using FinPlus.Infrastructure.Models;
 using FinPlusService;
 using FinPlusService.DefualtBet;
+using FinPlusService.User.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,7 @@ builder.Services.AddSingleton<IAdminService, AdminService>();
 builder.Services.AddSingleton<IDropService, DropService>();
 builder.Services.AddSingleton<ITraferService, TraferService>();
 builder.Services.AddSingleton<IDefaultBetService, DefaultBetService>();
+builder.Services.AddSingleton<IAuthService, AuthService>();
 
 var app = builder.Build();
 

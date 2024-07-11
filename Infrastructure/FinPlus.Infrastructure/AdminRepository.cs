@@ -35,5 +35,10 @@
             });
             return;
         }
+
+        public async Task<Admin> GetAdminByLogin(string login)
+        {
+            return await _adminCollection.Find(a => a.Login == login).FirstOrDefaultAsync();
+        }
     }
 }
