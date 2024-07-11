@@ -7,12 +7,12 @@
     using FinPlusService.DefualtBet;
     using Microsoft.AspNetCore.Mvc;
 
-    public class TraferController : Controller
+    public class TrafferController : Controller
     {
         private readonly ITraferService _trafferService;
         private readonly IDefaultBetService _defaultBetService;
 
-        public TraferController(ITraferService trafferService, IDefaultBetService defaultBetService)
+        public TrafferController(ITraferService trafferService, IDefaultBetService defaultBetService)
         {
             _trafferService = trafferService;
             _defaultBetService = defaultBetService;
@@ -20,12 +20,12 @@
 
         public async Task<IActionResult> Index()
         {
-            List<TraferModel> model = new List<TraferModel>();
+            List<TrafferModel> model = new List<TrafferModel>();
             var traffers = await _trafferService.GetAllTraffers();
 
             foreach (var traffer in traffers)
             {
-                TraferModel traferModel = new TraferModel()
+                TrafferModel traferModel = new TrafferModel()
                 {
                     Id = traffer.Id,
                     Name = traffer.Name,
@@ -47,7 +47,7 @@
 
         [HttpGet]
         [HttpPost]
-        public async Task<IActionResult> AddTrafer(TraferModel model, string name)
+        public async Task<IActionResult> AddTrafer(TrafferModel model, string name)
         {
             if (name == null)
             {

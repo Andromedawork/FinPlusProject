@@ -4,7 +4,7 @@
     using FinPlus.Domain.Users.Drop;
     using FinPlus.Domain.Users.Trafer;
 
-    public class TraferModel
+    public class TrafferModel
     {
         public string? Id { get; set; }
 

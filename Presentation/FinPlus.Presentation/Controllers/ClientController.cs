@@ -5,13 +5,13 @@
     using Microsoft.AspNetCore.Mvc;
     using WebApplication1.Models;
 
-    public class ClientsController : Controller
+    public class ClientController : Controller
     {
-        private readonly ILogger<ClientsController> _logger;
+        private readonly ILogger<ClientController> _logger;
 
         private readonly IDropService _dropService;
 
-        public ClientsController(ILogger<ClientsController> logger, IDropService dropService)
+        public ClientController(ILogger<ClientController> logger, IDropService dropService)
         {
             _logger = logger;
             _dropService = dropService;
