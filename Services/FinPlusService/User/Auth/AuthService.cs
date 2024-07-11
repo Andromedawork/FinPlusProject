@@ -24,7 +24,7 @@
 
                 if (traffer == null)
                 {
-                    return "Неправильный логин";
+                    return null;
                 }
 
                 if (BCrypt.Net.BCrypt.Verify(password, traffer.Password))
@@ -32,7 +32,7 @@
                     return "Traffer";
                 }
 
-                return "Неправильный пароль";
+                return null;
             }
 
             if (BCrypt.Net.BCrypt.Verify(password, admin.Password))
@@ -40,7 +40,7 @@
                 return admin.Role.ToString();
             }
 
-            return "Неправильный пароль";
+            return null;
         }
     }
 }

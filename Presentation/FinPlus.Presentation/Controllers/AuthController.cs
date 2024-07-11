@@ -28,7 +28,8 @@
                 return View(model);
             }
 
-            if (await _authService.Authentication(model.Login, model.Password))
+            var role = await _authService.Authentication(model.Login, model.Password);
+            if (role != null)
             {
                 return RedirectToAction("Index", "Home");
             }
