@@ -2,6 +2,6 @@
 {
     public interface IAuthService
     {
-        public Task<bool> Authentication(string login, string password);
+        public Task<string> Authentication(string login, string password);
     }
 }

@@ -38,6 +38,14 @@ builder.Services.AddSingleton<ITraferService, TraferService>();
 builder.Services.AddSingleton<IDefaultBetService, DefaultBetService>();
 builder.Services.AddSingleton<IAuthService, AuthService>();
 
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(360000);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

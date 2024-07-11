@@ -61,5 +61,10 @@
             var results = await _trafferCollection.Find(filter).ToListAsync();
             return results;
         }
+
+        public async Task<Traffer> GetTrafferByLogin(string login)
+        {
+            return await _trafferCollection.Find(t => t.Login == login).FirstOrDefaultAsync();
+        }
     }
 }

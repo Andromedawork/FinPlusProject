@@ -15,10 +15,12 @@
 
         public IActionResult Index()
         {
-            return View();
+            AuthModel model = new AuthModel();
+            return View(model);
         }
 
-        public async Task<IActionResult> Entrace(AuthModel model)
+        [HttpPost]
+        public async Task<IActionResult> Entrance(AuthModel model)
         {
             if (string.IsNullOrEmpty(model.Login) || string.IsNullOrEmpty(model.Password))
             {

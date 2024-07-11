@@ -47,7 +47,7 @@
 
         [HttpGet]
         [HttpPost]
-        public async Task<IActionResult> AddTrafer(TrafferModel model, string name)
+        public async Task<IActionResult> AddTraffer(TrafferModel model, string name)
         {
             if (name == null)
             {
@@ -90,7 +90,7 @@
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> EditTrafer(string id)
+        public async Task<IActionResult> EditTraffer(string id)
         {
             var traffer = await _trafferService.GetTrafferById(id);
             return View(traffer);

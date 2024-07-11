@@ -1,26 +1,46 @@
 ﻿namespace FinPlusService.User.Auth
 {
     using FinPlus.Domain.Users.Admin;
+    using FinPlus.Domain.Users.Trafer;
 
     public class AuthService : IAuthService
     {
         private readonly IAdminRepository _adminRepository;
+        private readonly ITrafferRepository _trafferRepository;
 
-        public AuthService(IAdminRepository adminRepository)
+        public AuthService(IAdminRepository adminRepository, ITrafferRepository trafferRepository)
         {
             _adminRepository = adminRepository;
+            _trafferRepository = trafferRepository;
         }
 
-        public async Task<bool> Authentication(string login, string password)
+        public async Task<string> Authentication(string login, string password)
         {
             var admin = await _adminRepository.GetAdminByLogin(login);
 
             if (admin == null)
             {
-                return false;
+                var traffer = await _trafferRepository.GetTrafferByLogin(login);
+
+                if (traffer == null)
+                {
+                    return "Неправильный логин";
+                }
+
+                if (BCrypt.Net.BCrypt.Verify(password, traffer.Password))
+                {
+                    return "Traffer";
+                }
+
+                return "Неправильный пароль";
             }
 
-            return BCrypt.Net.BCrypt.Verify(password, admin.Password);
+            if (BCrypt.Net.BCrypt.Verify(password, admin.Password))
+            {
+                return admin.Role.ToString();
+            }
+
+            return "Неправильный пароль";
         }
     }
 }

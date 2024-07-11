@@ -1,5 +1,5 @@
-﻿@using FinPlus.Presentation.Models;
-@model List<TrafferModel>
+﻿@using FinPlus.Domain.Users.Admin;
+@model List<Admin>
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">Рефоводы</div>
+        <div class="header">Клиенты</div>
         <div class="search-form">
             <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
@@ -25,31 +25,25 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>ФИО</th>
-                        <th>Всего приведено</th>
-                        <th>Всего заработано</th>
-                        <th>Прибыль в текущем месяце</th>
+                        <th>Роль</th>
+                        <th>Телефон</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var trafer in Model)
+                    @foreach (var admin in Model)
                     {
                         <tr>
-                        <td>@trafer.ReferalId</td>
-                        <td>@trafer.Name.ToString()</td>
-                        <td>@trafer.MyDrops.Count()</td>
-                        <td>@trafer.Revenue</td>
-                        <td>@trafer.ProfitInMonth</td>
-                        <td>
-                            <a class="nav-link text-secondary" asp-controller="Traffer" asp-action="EditTraffer" asp-route-id="@trafer.Id">Ред.</a>
-                        </td>
+                            <td>@admin.Name.ToString()</td
+                            <td>@admin.Role</td>
+                            <td>@admin.MobileNumber</td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <a class="nav-link text-secondary" asp-controller="Traffer" asp-action="AddTraffer">Добавить+</a>
+            <a class="nav-link text-secondary" asp-controller="Clients" asp-action="EditClient" //asp-route-id ="@drop.Id">Ред.</a>
+            <a class="nav-link text-secondary" asp-controller="Clients" asp-action="AddClient">Добавить+</a>
         </div>
     </div>
 </body>

@@ -11,5 +11,7 @@
         public Task<bool> UpdateTraffer(Traffer traffer);
 
         public Task<List<Traffer>> GetAllTraffersByPartName(string partName);
+
+        public Task<Traffer> GetTrafferByLogin(string login);
     }
 }
