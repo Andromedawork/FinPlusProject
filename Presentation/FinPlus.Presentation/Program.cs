@@ -7,6 +7,7 @@ using FinPlus.Domain.Users.Trafer;
 using FinPlus.Infrastructure;
 using FinPlus.Infrastructure.Models;
 using FinPlusService;
+using FinPlusService.Calendar;
 using FinPlusService.DefualtBet;
 using FinPlusService.User.Auth;
 
@@ -31,6 +32,7 @@ builder.Services.AddSingleton<ITrafferRepository, TrafferRepository>();
 builder.Services.AddSingleton<IOrganisationsRepository, OrganisationRepository>();
 builder.Services.AddSingleton<IDefaultBetRepository, DefaultBetRepository>();
 builder.Services.AddSingleton<ICalendarRepository, CalendarRepository>();
+builder.Services.AddSingleton<ICalendarService, CalendarService>();
 builder.Services.AddSingleton<IAdminRepository, AdminRepository>();
 builder.Services.AddSingleton<IAdminService, AdminService>();
 builder.Services.AddSingleton<IDropService, DropService>();
@@ -44,6 +46,8 @@ builder.Services.AddSession();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromSeconds(360000);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
 });
 
 var app = builder.Build();

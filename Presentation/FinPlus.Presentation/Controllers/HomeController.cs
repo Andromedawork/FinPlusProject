@@ -15,6 +15,8 @@ namespace FinPlus.Presentation.Controllers
 
         public IActionResult Index()
         {
+            var role = HttpContext.Session.GetString("Role");
+            ViewBag.UserRole = role;
             return View();
         }
 
@@ -22,6 +24,12 @@ namespace FinPlus.Presentation.Controllers
         public IActionResult Error(ErrorViewModel model)
         {
             return View(model);
+        }
+
+        public IActionResult Exit()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Auth");
         }
     }
 }

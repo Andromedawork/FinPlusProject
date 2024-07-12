@@ -19,9 +19,12 @@
 
         public async Task<IActionResult> Index()
         {
+            var role = HttpContext.Session.GetString("Role");
+            ViewBag.UserRole = role;
+
             try
             {
-                var drops = _dropService.GetAllDrops();
+                var drops = await _dropService.GetAllDrops();
                 List<DropModel> model = new List<DropModel>();
                 return View(model);
             }
@@ -37,6 +40,9 @@
         [HttpGet]
         public async Task<IActionResult> AddClient(DropModel model)
         {
+            var role = HttpContext.Session.GetString("Role");
+            ViewBag.UserRole = role;
+
             if (model.Name != null)
             {
                 return RedirectToAction("Index");
@@ -47,6 +53,9 @@
 
         public async Task<IActionResult> EditClient(DropModel model)
         {
+            var role = HttpContext.Session.GetString("Role");
+            ViewBag.UserRole = role;
+
             return View();
         }
     }

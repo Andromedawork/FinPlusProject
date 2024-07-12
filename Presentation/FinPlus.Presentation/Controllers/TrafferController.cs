@@ -20,6 +20,9 @@
 
         public async Task<IActionResult> Index()
         {
+            var role = HttpContext.Session.GetString("Role");
+            ViewBag.UserRole = role;
+
             List<TrafferModel> model = new List<TrafferModel>();
             var traffers = await _trafferService.GetAllTraffers();
 
@@ -49,6 +52,9 @@
         [HttpPost]
         public async Task<IActionResult> AddTraffer(TrafferModel model, string name)
         {
+            var role = HttpContext.Session.GetString("Role");
+            ViewBag.UserRole = role;
+
             if (name == null)
             {
                 return View(model);
@@ -92,6 +98,9 @@
 
         public async Task<IActionResult> EditTraffer(string id)
         {
+            var role = HttpContext.Session.GetString("Role");
+            ViewBag.UserRole = role;
+
             var traffer = await _trafferService.GetTrafferById(id);
             return View(traffer);
         }

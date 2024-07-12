@@ -11,7 +11,7 @@
 
         public Role Role { get; set; }
 
-        public string? Name { get; set; }
+        public FIO? Name { get; set; }
 
         public string? Login { get; set; }
 

@@ -33,5 +33,10 @@
             });
             return;
         }
+
+        public async Task<List<Records>> GetRecordsByDate(DateTime date)
+        {
+            return await _recordsCollection.Find(r => r.Day.Day == date.Day).ToListAsync();
+        }
     }
 }

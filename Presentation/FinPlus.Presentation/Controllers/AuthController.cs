@@ -13,9 +13,11 @@
             _authService = authService;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(AuthModel model)
         {
-            AuthModel model = new AuthModel();
+            var role = HttpContext.Session.GetString("Role");
+            ViewBag.UserRole = role;
+
             return View(model);
         }
 
@@ -31,12 +33,13 @@
             var role = await _authService.Authentication(model.Login, model.Password);
             if (role != null)
             {
+                HttpContext.Session.SetString("Role", role);
                 return RedirectToAction("Index", "Home");
             }
 
             model.Error = "Неверный логин или пароль";
 
-            return View(model);
+            return RedirectToAction("Index", model);
         }
     }
 }

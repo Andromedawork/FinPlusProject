@@ -3,31 +3,51 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - FinPlus.Presentation</title>
+    <title>@ViewData["Title"] - FinPlus</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/stylenavpanel.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/stylenavpanel.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/stylebtn.css" asp-append-version="true" />
 </head>
 <body>
-    <div id="sidebarMenu" class="sidebar">
-        <a class="nav-link" asp-area="" asp-controller="Clients" asp-action="Index">Клиенты</a>
-        <a class="nav-link" asp-area="" asp-controller="Traffer" asp-action="Index">Траферы</a>
-        <a class="nav-link" asp-area="" asp-controller="Sources" asp-action="Index">Источники</a>
-        <a class="nav-link" asp-area="" asp-controller="Finances" asp-action="Index">Финансы</a>
-        <a class="nav-link" asp-area="" asp-controller="Offer" asp-action="Index">Офферы</a>
-        <a class="nav-link" asp-area="" asp-controller="Calendar" asp-action="Index">Календарь</a>
-        <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Администраторы</a>
+    @if (ViewBag.UserRole != null)
+    {
+        <div id="sidebarMenu" class="sidebar">
+            @if (ViewBag.UserRole == "Admin")
+            {
+                <a class="nav-link" asp-area="" asp-controller="Client" asp-action="Index">Клиенты</a>
+                <a class="nav-link" asp-area="" asp-controller="Traffer" asp-action="Index">Траферы</a>
+                <a class="nav-link" asp-area="" asp-controller="Sources" asp-action="Index">Источники</a>
+                <a class="nav-link" asp-area="" asp-controller="Finances" asp-action="Index">Финансы</a>
+                <a class="nav-link" asp-area="" asp-controller="Offer" asp-action="Index">Офферы</a>
+                <a class="nav-link" asp-area="" asp-controller="Calendar" asp-action="Index">Календарь</a>
+                <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Администраторы</a>
+            }
+            else if (ViewBag.UserRole == "Manager")
+            {
+                <a class="nav-link" asp-area="" asp-controller="Client" asp-action="Index">Клиенты</a>
+                <a class="nav-link" asp-area="" asp-controller="Sources" asp-action="Index">Источники</a>
+                <a class="nav-link" asp-area="" asp-controller="Calendar" asp-action="Index">Календарь</a>
+            }
+            <a class="nav-link" asp-area="" asp-controller="Account" asp-action="Exit">Выход</a>
+        </div>
 
-    </div>
-
-    <div id="main">
-        <button class="openbtn" onclick="toggleNav()">&#9776;</button>
-        <div class="overlay" id="overlay" onclick="toggleNav()"></div>
-        <main class="content">
-            @RenderBody()
-        </main>
-    </div>
+        <div id="main">
+            <button class="openbtn" onclick="toggleNav()">&#9776;</button>
+            <div class="overlay" id="overlay" onclick="toggleNav()"></div>
+            <main class="content">
+                @RenderBody()
+            </main>
+        </div>
+    }
+    else
+    {
+        <div id="main">
+            <main class="content">
+                @RenderBody()
+            </main>
+        </div>
+    }
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -13,6 +13,7 @@
 
         public async Task AddAdmin(Admin admin)
         {
+            admin.Password = BCrypt.Net.BCrypt.HashPassword(admin.Password);
             await _adminRepository.AddAdmin(admin);
         }
 

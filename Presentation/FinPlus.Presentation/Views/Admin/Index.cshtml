@@ -35,15 +35,15 @@
                     @foreach (var admin in Model)
                     {
                         <tr>
-                            <td>@admin.Name.ToString()</td
+                            <td>@admin.Name.ToString()</td>
                             <td>@admin.Role</td>
                             <td>@admin.MobileNumber</td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <a class="nav-link text-secondary" asp-controller="Clients" asp-action="EditClient" //asp-route-id ="@drop.Id">Ред.</a>
-            <a class="nav-link text-secondary" asp-controller="Clients" asp-action="AddClient">Добавить+</a>
+            <a class="nav-link text-secondary" asp-controller="Admin" asp-action="EditClient" //asp-route-id ="@drop.Id">Ред.</a>
+            <a class="nav-link text-secondary" asp-controller="Admin" asp-action="AddAdmin">Добавить+</a>
         </div>
     </div>
 </body>

@@ -16,11 +16,21 @@
 
     function updateCalendar() {
         daysContainer.innerHTML = '';
-        const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+        const firstDayOfMonth = (new Date(currentYear, currentMonth, 1).getDay() || 7) - 1; // Понедельник - 0
         const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
 
         monthYear.textContent = `${monthNames[currentMonth]} ${currentYear}`;
 
+        // Дни предыдущего месяца
+        const daysInPrevMonth = new Date(currentYear, currentMonth, 0).getDate();
+        for (let i = firstDayOfMonth; i > 0; i--) {
+            const day = document.createElement('div');
+            day.textContent = daysInPrevMonth - i + 1;
+            day.classList.add('prev-month');
+            daysContainer.appendChild(day);
+        }
+
+        // Дни текущего месяца
         for (let i = 1; i <= daysInMonth; i++) {
             const day = document.createElement('div');
             day.textContent = i;
@@ -32,6 +42,16 @@
                 document.querySelectorAll('.days div').forEach(d => d.classList.remove('selected'));
                 day.classList.add('selected');
             });
+            daysContainer.appendChild(day);
+        }
+
+        // Дни следующего месяца
+        const totalDays = daysContainer.children.length;
+        const daysToShowNextMonth = totalDays % 7 === 0 ? 0 : 7 - (totalDays % 7);
+        for (let i = 1; i <= daysToShowNextMonth; i++) {
+            const day = document.createElement('div');
+            day.textContent = i;
+            day.classList.add('next-month');
             daysContainer.appendChild(day);
         }
     }

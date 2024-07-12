@@ -81,6 +81,10 @@ h1, h2 {
             color: white;
         }
 
+        .days div.prev-month, .days div.next-month {
+            color: #aaa;
+        }
+
 .schedule {
     margin-top: 20px;
 }
