@@ -1,11 +1,9 @@
 ﻿namespace FinPlus.Presentation.Controllers
 {
     using FinPlus.Domain.CalendarOfDrops;
+    using FinPlus.Presentation.Models;
     using FinPlusService.Calendar;
     using Microsoft.AspNetCore.Mvc;
-    using MongoDB.Bson;
-    using MongoDB.Driver;
-    using MongoDB.Driver.Linq;
 
     public class CalendarController : Controller
     {
@@ -25,15 +23,14 @@
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddDropRecord(DropRecord record, DateTime selectedDate)
+        public async Task<ActionResult> AddDropRecord([FromBody] DropRecordModel model)
         {
+            DateTime selectedDateTime = DateTime.Parse(model.SelectedHour);
+            model.Record.Time = selectedDateTime;
             Records newRecord = new Records()
             {
-                Day = selectedDate,
-                DropRecords = new Dictionary<string, DropRecord>
-                {
-                    { selectedDate.ToString("o"), record },
-                },
+                Day = selectedDateTime,
+                DropRecords = model.Record,
                 OrganisationId = "000",
             };
             await _calendarService.AddRecord(newRecord);

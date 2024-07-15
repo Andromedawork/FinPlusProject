@@ -31,7 +31,7 @@
             {
                 if (record.DropRecords != null)
                 {
-                    dropRecords.AddRange(record.DropRecords.Values);
+                    dropRecords.Add(record.DropRecords);
                 }
             }
 

@@ -13,8 +13,7 @@
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime Day { get; set; }
 
-        [BsonDictionaryOptions(DictionaryRepresentation.Document)]
-        public Dictionary<string, DropRecord>? DropRecords { get; set; }
+        public DropRecord? DropRecords { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

@@ -34,7 +34,7 @@
         for (let i = 1; i <= daysInMonth; i++) {
             const day = document.createElement('div');
             day.textContent = i;
-            day.dataset.date = new Date(currentYear, currentMonth, i).toISOString().split('T')[0];
+            day.dataset.date = new Date(Date.UTC(currentYear, currentMonth, i)).toISOString().split('T')[0];
             day.addEventListener('click', () => {
                 selectedDate = day.dataset.date;
                 selectedDateElem.textContent = selectedDate;
@@ -69,13 +69,13 @@
                     li.textContent = `${hour}:00`;
 
                     // Check if there is a record for this hour
-                    const record = records.find(r => new Date(r.Time).getHours() === hour);
+                    const record = records.find(r => new Date(r.time).getUTCHours() === hour);
                     if (record) {
-                        li.textContent += ` - ${record.Name} ${record.Surname}`;
+                        li.textContent += ` - ${record.surname} ${record.name} моб. ${record.mobileNumber}`;
                     }
 
                     li.addEventListener('click', () => {
-                        selectedHour = `${selectedDate} ${hour}:00`;
+                        selectedHour = `${selectedDate}T${hour.toString().padStart(2, '0')}:00:00.000Z`;
                         entryModal.modal('show');
                     });
 
@@ -120,9 +120,9 @@
                 surname,
                 patronymic
             },
-            selectedDate: selectedDate
+            selectedDate: selectedDate,
+            selectedHour: selectedHour
         };
-
 
         fetch('/Calendar/AddDropRecord', {
             method: 'POST',
