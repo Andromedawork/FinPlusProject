@@ -6,55 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FINPLUS - Добро пожаловать!</title>
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
-
-        .background {
-            background-image: url('path/to/your/background-image.jpg'); /* Замените на путь к вашему изображению */
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            height: 100%;
-            color: white;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный цвет */
-        }
-
-        .content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .welcome {
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-
-        .finplus {
-            font-size: 4em;
-            font-weight: bold;
-            background: linear-gradient(45deg, #00f, #f0f, #0ff, #0f0, #ff0, #f00, #00f);
-            background-size: 400%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradient 5s infinite linear;
-        }
-    </style>
+    <link rel="stylesheet" href="~/css/stylehome.css" asp-append-version="true" />
 </head>
 <body>
     <div class="background">

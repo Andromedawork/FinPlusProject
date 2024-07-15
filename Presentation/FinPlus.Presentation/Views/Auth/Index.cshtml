@@ -1,53 +1,38 @@
 ﻿@model FinPlus.Presentation.Models.AuthModel
-
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Вход</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вход CRM</title>
+  <link rel="stylesheet" href="~/css/styleauth.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header text-center">
-                        Вход
+  <div class="login-container">
+    <div class="login-left">
+      <div class="login-form">
+        <h2>Вход CRM</h2>
+                @if (Model.Error != null)
+                {
+                    <div class="alert alert-danger text-center" role="alert">
+                        @Model.Error
                     </div>
-                    <div class="card-body">
-                        @if (Model.Error != null)
-                        {
-                            <div class="alert alert-danger text-center" role="alert">
-                                @Model.Error
-                            </div>
-                        }
-                        <form asp-controller="Auth" asp-action="Entrance" method="post">
-                            <div class="form-group row align-items-center">
-                                <div class="col">
-                                    <div class="form-floating mb-3">
-                                        <input asp-for="Login" class="form-control" placeholder="Логин">
-                                        <label asp-for="Login">Логин</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="form-floating mb-3">
-                                    <input asp-for="Password" class="form-control" type ="password" placeholder="Пароль">
-                                    <label asp-for="Password">Пароль</label>
-                                </div>
-                            </div>
-                            <button id="registerButton" type="submit" class="btn btn-outline-primary">Войти</button>
-                        </form>
+                }
+                <form asp-controller="Auth" asp-action="Entrance" method="post">
+                    <div class="form-floating mb-3">
+                        <input asp-for="Login" class="form-control" id="login" placeholder=" " autocomplete="off">
+                        <label for="login">Логин</label>
                     </div>
-                </div>
-            </div>
-        </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Password" class="form-control" id="password" type="password" placeholder=" " autocomplete="off">
+                        <label for="password">Пароль</label>
+                    </div>
+                    <button id="registerButton" type="submit" class="btn btn-outline-primary w-100">Войти</button>
+                </form>
+        <p class="error-message"></p>
+      </div>
     </div>
-
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <div class="login-right"></div>
+  </div>
 </body>
 </html>
