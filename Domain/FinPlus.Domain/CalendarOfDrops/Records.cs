@@ -2,6 +2,7 @@
 {
     using MongoDB.Bson;
     using MongoDB.Bson.Serialization.Attributes;
+    using MongoDB.Bson.Serialization.Options;
 
     public class Records
     {
@@ -12,7 +13,8 @@
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime Day { get; set; }
 
-        public Dictionary<DateTime, DropRecord>? DropRecords { get; set; }
+        [BsonDictionaryOptions(DictionaryRepresentation.Document)]
+        public Dictionary<string, DropRecord>? DropRecords { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

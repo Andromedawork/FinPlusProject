@@ -6,8 +6,8 @@
     const nextMonthButton = document.getElementById('nextMonth');
     const selectedDateElem = document.getElementById('selectedDate');
     const hourList = document.getElementById('hourList');
-    const entryForm = document.getElementById('entryForm');
     const entryModal = $('#entryModal');
+    const entryForm = document.getElementById('entryForm');
 
     let currentMonth = new Date().getMonth();
     let currentYear = new Date().getFullYear();
@@ -60,15 +60,28 @@
         hourList.innerHTML = '';
         if (!selectedDate) return;
 
-        for (let hour = 10; hour <= 18; hour++) {
-            const li = document.createElement('li');
-            li.textContent = `${hour}:00`;
-            li.addEventListener('click', () => {
-                selectedHour = `${selectedDate} ${hour}:00`;
-                entryModal.modal('show');
+        // Fetch the records for the selected date
+        fetch(`/Calendar/GetDropRecordByDate?date=${selectedDate}`)
+            .then(response => response.json())
+            .then(records => {
+                for (let hour = 10; hour <= 18; hour++) {
+                    const li = document.createElement('li');
+                    li.textContent = `${hour}:00`;
+
+                    // Check if there is a record for this hour
+                    const record = records.find(r => new Date(r.Time).getHours() === hour);
+                    if (record) {
+                        li.textContent += ` - ${record.Name} ${record.Surname}`;
+                    }
+
+                    li.addEventListener('click', () => {
+                        selectedHour = `${selectedDate} ${hour}:00`;
+                        entryModal.modal('show');
+                    });
+
+                    hourList.appendChild(li);
+                }
             });
-            hourList.appendChild(li);
-        }
     }
 
     prevMonthButton.addEventListener('click', () => {
@@ -100,24 +113,32 @@
         const patronymic = entryForm.patronymic.value;
 
         const entryData = {
-            date: selectedDate,
-            time: selectedHour,
-            referalId,
-            mobileNumber,
-            name,
-            surname,
-            patronymic
+            record: {
+                referalId,
+                mobileNumber,
+                name,
+                surname,
+                patronymic
+            },
+            selectedDate: selectedDate
         };
 
-        console.log(entryData);
-        entryModal.modal('hide');
-        entryForm.reset();
 
-        // Add the entry to the hour list
-        const li = hourList.querySelector(`li:contains("${selectedHour.split(' ')[1]}")`);
-        if (li) {
-            li.textContent = `${selectedHour.split(' ')[1]} - ${name} ${surname}`;
-        }
+        fetch('/Calendar/AddDropRecord', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(entryData)
+        }).then(response => {
+            if (response.ok) {
+                entryModal.modal('hide');
+                entryForm.reset();
+                updateHourList();
+            } else {
+                console.error('Error adding record');
+            }
+        });
     });
 
     updateCalendar();

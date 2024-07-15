@@ -25,17 +25,15 @@
         {
             var records = await _calendarRepository.GetRecordsByDate(date);
 
-            var dropRecords = records
-            .SelectMany(r => r.DropRecords?.Where(kv => kv.Key.Date == date.Date).Select(kv => kv.Value))
-            .Select(dr => new DropRecord
+            List<DropRecord> dropRecords = new List<DropRecord>();
+
+            foreach (var record in records)
             {
-                ReferalId = dr.ReferalId,
-                MobileNumber = dr.MobileNumber,
-                Name = dr.Name,
-                Surname = dr.Surname,
-                Patronymic = dr.Patronymic,
-            })
-            .ToList();
+                if (record.DropRecords != null)
+                {
+                    dropRecords.AddRange(record.DropRecords.Values);
+                }
+            }
 
             return dropRecords;
         }

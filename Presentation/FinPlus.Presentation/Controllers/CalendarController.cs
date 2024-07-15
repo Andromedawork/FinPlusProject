@@ -3,10 +3,10 @@
     using FinPlus.Domain.CalendarOfDrops;
     using FinPlusService.Calendar;
     using Microsoft.AspNetCore.Mvc;
+    using MongoDB.Bson;
     using MongoDB.Driver;
+    using MongoDB.Driver.Linq;
 
-    [Route("api/[controller]")]
-    [ApiController]
     public class CalendarController : Controller
     {
         private readonly ICalendarService _calendarService;
@@ -24,34 +24,27 @@
             return View();
         }
 
-        public async Task<ActionResult> AddDropRecord(DropRecord record)
+        [HttpPost]
+        public async Task<ActionResult> AddDropRecord(DropRecord record, DateTime selectedDate)
         {
             Records newRecord = new Records()
             {
-                Day = DateTime.Now,
-                DropRecords = new Dictionary<DateTime, DropRecord>
+                Day = selectedDate,
+                DropRecords = new Dictionary<string, DropRecord>
                 {
-                    { DateTime.Now, record },
+                    { selectedDate.ToString("o"), record },
                 },
-                CreatedAt = DateTime.Now,
                 OrganisationId = "000",
             };
             await _calendarService.AddRecord(newRecord);
             return RedirectToAction("Index");
         }
 
-        [HttpGet("GetRecordsByDate")]
-        public async Task<IActionResult> GetRecordsByDate(DateTime date)
+        [HttpGet]
+        public async Task<IActionResult> GetDropRecordByDate(DateTime date)
         {
-            try
-            {
-                var dropRecords = await _calendarService.GetDropRecordByDate(date);
-                return Ok(dropRecords);
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"Ошибка сервера: {ex.Message}");
-            }
+            var records = await _calendarService.GetDropRecordByDate(date);
+            return Json(records);
         }
     }
 }
