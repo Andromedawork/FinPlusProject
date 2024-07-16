@@ -16,8 +16,8 @@
     <div class="container">
         <div class="header">Клиенты</div>
         <div class="search-form">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+            <form asp-controller="Admin" asp-action="SearchAdmin" method="post" class="form-inline">
+                <input id="partName" name="partName" class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
                 <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Найти</button>
             </form>
         </div>
@@ -38,11 +38,14 @@
                             <td>@admin.Name.ToString()</td>
                             <td>@admin.Role</td>
                             <td>@admin.MobileNumber</td>
+                            @if (admin.Role != 0)
+                            {
+                                <td><a class="nav-link text-secondary" asp-controller="Admin" asp-action="EditAdmin" asp-route-id="@admin.Id">Ред.</a></td>
+                            }
                         </tr>
                     }
                 </tbody>
             </table>
-            <a class="nav-link text-secondary" asp-controller="Admin" asp-action="EditClient" //asp-route-id ="@drop.Id">Ред.</a>
             <a class="nav-link text-secondary" asp-controller="Admin" asp-action="AddAdmin">Добавить+</a>
         </div>
     </div>

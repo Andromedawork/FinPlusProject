@@ -7,5 +7,11 @@
         public Task AddAdmin(Admin admin);
 
         public Task<List<Admin>> GetAllAdmins();
+
+        public Task<Admin> GetAdminById(string id);
+
+        public Task<bool> UpdateAdmin(Admin admin);
+
+        public Task<List<Admin>> GetAllAdminsByPartName(string partName);
     }
 }

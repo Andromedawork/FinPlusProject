@@ -18,14 +18,6 @@ builder.Services.Configure<MongoDBSettingsModel>(builder.Configuration.GetSectio
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromSeconds(600);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});
-
 builder.Services.AddSingleton<IDropRepository, DropRepository>();
 builder.Services.AddSingleton<IOfferRepository, OfferRepository>();
 builder.Services.AddSingleton<ITrafferRepository, TrafferRepository>();
@@ -41,13 +33,12 @@ builder.Services.AddSingleton<IDefaultBetService, DefaultBetService>();
 builder.Services.AddSingleton<IAuthService, AuthService>();
 
 builder.Services.AddDistributedMemoryCache();
-builder.Services.AddSession();
-
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(360000);
+    options.IdleTimeout = TimeSpan.FromSeconds(6000);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
 
 var app = builder.Build();

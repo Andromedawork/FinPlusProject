@@ -15,7 +15,7 @@
         <form asp-controller="Admin" asp-action="AddAdmin" method="post">
             <div class="mb-3">
                 <label id="name" class="form-label">ФИО</label>
-                <input id="name" name="name" class="form-control" required />
+                <input id="name" name="name" class="form-control" value="@Model.Name.ToString()" required />
             </div>
             <div class="mb-3">
                 <label asp-for="Login" class="form-label">Логин</label>

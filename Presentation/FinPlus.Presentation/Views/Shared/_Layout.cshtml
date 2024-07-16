@@ -13,19 +13,20 @@
     @if (ViewBag.UserRole != null)
     {
         <div id="sidebarMenu" class="sidebar">
-            @if (ViewBag.UserRole == "Admin")
+            @if (ViewBag.UserRole == "Admin" || ViewBag.UserRole == "MainAdmin" )
             {
                 <a class="nav-link" asp-area="" asp-controller="Client" asp-action="Index">Клиенты</a>
-                <a class="nav-link" asp-area="" asp-controller="Traffer" asp-action="Index">Траферы</a>
+                <a class="nav-link" asp-area="" asp-controller="Traffer" asp-action="Index">Партнеры</a>
                 <a class="nav-link" asp-area="" asp-controller="Sources" asp-action="Index">Источники</a>
                 <a class="nav-link" asp-area="" asp-controller="Finances" asp-action="Index">Финансы</a>
                 <a class="nav-link" asp-area="" asp-controller="Offer" asp-action="Index">Офферы</a>
                 <a class="nav-link" asp-area="" asp-controller="Calendar" asp-action="Index">Календарь</a>
-                <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Администраторы</a>
+                <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Администрация</a>
             }
             else if (ViewBag.UserRole == "Manager")
             {
                 <a class="nav-link" asp-area="" asp-controller="Client" asp-action="Index">Клиенты</a>
+                <a class="nav-link" asp-area="" asp-controller="Offer" asp-action="Index">Офферы</a>
                 <a class="nav-link" asp-area="" asp-controller="Sources" asp-action="Index">Источники</a>
                 <a class="nav-link" asp-area="" asp-controller="Calendar" asp-action="Index">Календарь</a>
             }

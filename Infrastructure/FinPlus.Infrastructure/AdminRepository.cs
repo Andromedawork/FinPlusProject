@@ -1,6 +1,7 @@
 ﻿namespace FinPlus.Infrastructure
 {
     using FinPlus.Domain.Users.Admin;
+    using FinPlus.Domain.Users.Trafer;
     using FinPlus.Infrastructure.Models;
     using Microsoft.Extensions.Options;
     using MongoDB.Bson;
@@ -39,6 +40,42 @@
         public async Task<Admin> GetAdminByLogin(string login)
         {
             return await _adminCollection.Find(a => a.Login == login).FirstOrDefaultAsync();
+        }
+
+        public async Task<Admin> GetAdminById(string id)
+        {
+            return await _adminCollection.Find(a => a.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> UpdateAdmin(Admin admin)
+        {
+            var filter = Builders<Admin>.Filter.Eq(a => a.Id, admin.Id);
+            var update = Builders<Admin>.Update
+            .Set(a => a.Name, admin.Name)
+            .Set(a => a.Role, admin.Role)
+            .Set(a => a.MobileNumber, admin.MobileNumber)
+            .Set(a => a.Login, admin.Login)
+            .Set(a => a.OrganisationId, admin.OrganisationId);
+
+            var updateResult = await _adminCollection.UpdateOneAsync(filter, update);
+
+            return updateResult.ModifiedCount > 1;
+        }
+
+        public async Task<List<Admin>> GetAllAdminsByPartName(string partName)
+        {
+            if (!string.IsNullOrEmpty(partName))
+            {
+                var filter = Builders<Admin>.Filter.Or(
+                Builders<Admin>.Filter.Regex("Name.Surname", new BsonRegularExpression(partName, "i")),
+                Builders<Admin>.Filter.Regex("Name.Name", new BsonRegularExpression(partName, "i")),
+                Builders<Admin>.Filter.Regex("Name.Patronymic", new BsonRegularExpression(partName, "i")));
+
+                var results = await _adminCollection.Find(filter).ToListAsync();
+                return results;
+            }
+
+            return await GetAllAdmins();
         }
     }
 }

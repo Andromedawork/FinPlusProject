@@ -21,5 +21,20 @@
         {
             return await _adminRepository.GetAllAdmins();
         }
+
+        public async Task<Admin> GetAdminById(string id)
+        {
+            return await _adminRepository.GetAdminById(id);
+        }
+
+        public async Task<bool> UpdateAdmin(Admin admin)
+        {
+            return await _adminRepository.UpdateAdmin(admin);
+        }
+
+        public async Task<List<Admin>> GetAllAdminsByPartName(string partName)
+        {
+            return await _adminRepository.GetAllAdminsByPartName(partName);
+        }
     }
 }

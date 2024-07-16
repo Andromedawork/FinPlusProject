@@ -133,6 +133,9 @@
 
         public async Task<IActionResult> SearchTraffer(string partName)
         {
+            var role = HttpContext.Session.GetString("Role");
+            ViewBag.UserRole = role;
+
             var traffers = await _trafferService.GetTrafferByPartName(partName);
             List<TrafferModel> model = new List<TrafferModel>();
 
