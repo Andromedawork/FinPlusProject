@@ -1,6 +1,7 @@
 using FinPlus.Domain.CalendarOfDrops;
 using FinPlus.Domain.Offers;
 using FinPlus.Domain.Organisations;
+using FinPlus.Domain.Sources;
 using FinPlus.Domain.Users.Admin;
 using FinPlus.Domain.Users.Drop;
 using FinPlus.Domain.Users.Trafer;
@@ -9,6 +10,7 @@ using FinPlus.Infrastructure.Models;
 using FinPlusService;
 using FinPlusService.Calendar;
 using FinPlusService.DefualtBet;
+using FinPlusService.Sources;
 using FinPlusService.User.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +33,8 @@ builder.Services.AddSingleton<IDropService, DropService>();
 builder.Services.AddSingleton<ITraferService, TraferService>();
 builder.Services.AddSingleton<IDefaultBetService, DefaultBetService>();
 builder.Services.AddSingleton<IAuthService, AuthService>();
+builder.Services.AddSingleton<ISourceRepository, SourceRepository>();
+builder.Services.AddSingleton<ISourceService, SourceService>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

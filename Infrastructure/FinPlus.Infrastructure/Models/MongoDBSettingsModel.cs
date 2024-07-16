@@ -19,5 +19,7 @@
         public string TraffersCollection { get; set; } = null!;
 
         public string DefaultBetsCollection { get; set; } = null!;
+
+        public string SourceCollection { get; set; } = null!;
     }
 }
