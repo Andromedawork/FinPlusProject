@@ -11,5 +11,7 @@
         public Task<bool> UpdateSource(Source source);
 
         public Task<List<Source>> GetAllSourceByPartName(string partName);
+
+        public Task DeleteSource(string id);
     }
 }

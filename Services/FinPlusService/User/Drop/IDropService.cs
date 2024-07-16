@@ -9,5 +9,7 @@
         public Task AddDrop(Drop drop);
 
         public Task<List<Drop>> GetAllDropsByPartName(string partName);
+
+        public Task DeleteDrop(string id);
     }
 }

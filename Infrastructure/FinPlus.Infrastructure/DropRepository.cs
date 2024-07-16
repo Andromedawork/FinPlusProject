@@ -1,6 +1,5 @@
 ﻿namespace FinPlus.Infrastructure
 {
-    using Amazon.Runtime.SharedInterfaces;
     using FinPlus.Domain.Offers;
     using FinPlus.Domain.Users;
     using FinPlus.Domain.Users.Drop;
@@ -117,6 +116,11 @@
             }
 
             return await GetAllDrops();
+        }
+
+        public async Task DeleteDrop(string id)
+        {
+            await _dropsCollection.DeleteOneAsync(id);
         }
     }
 }

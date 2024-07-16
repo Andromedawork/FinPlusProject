@@ -17,5 +17,7 @@
         public Task<decimal> GetTrafferProfitInMonth(string id, int month);
 
         public Task<List<Traffer>> GetTrafferByPartName(string partName);
+
+        public Task DeleteTrafer(string id);
     }
 }

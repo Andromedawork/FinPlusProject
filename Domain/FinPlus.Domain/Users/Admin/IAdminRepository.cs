@@ -13,5 +13,7 @@
         public Task<List<Admin>> GetAllAdminsByPartName(string partName);
 
         public Task<bool> UpdateAdmin(Admin admin);
+
+        public Task DeleteAdmin(string id);
     }
 }

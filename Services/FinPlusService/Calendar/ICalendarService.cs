@@ -9,5 +9,7 @@
         public Task AddRecord(Records record);
 
         public Task<List<DropRecord>> GetDropRecordByDate(DateTime date);
+
+        public Task DeleteRecord(string id);
     }
 }

@@ -25,5 +25,10 @@
         {
             return await _dropRepository.GetAllDropsByPartName(partName);
         }
+
+        public async Task DeleteDrop(string id)
+        {
+            await _dropRepository.DeleteDrop(id);
+        }
     }
 }

@@ -52,5 +52,10 @@
         {
             return await _trafferRepository.GetAllTraffersByPartName(partName);
         }
+
+        public async Task DeleteTrafer(string id)
+        {
+            await _trafferRepository.DeleteTraffer(id);
+        }
     }
 }

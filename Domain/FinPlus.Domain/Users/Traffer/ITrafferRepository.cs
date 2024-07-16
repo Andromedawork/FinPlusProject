@@ -13,5 +13,7 @@
         public Task<List<Traffer>> GetAllTraffersByPartName(string partName);
 
         public Task<Traffer> GetTrafferByLogin(string login);
+
+        public Task DeleteTraffer(string id);
     }
 }

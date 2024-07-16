@@ -38,5 +38,10 @@
         {
             return await _recordsCollection.Find(r => r.Day.Day == date.Day).ToListAsync();
         }
+
+        public async Task DeleteRecords(string id)
+        {
+            await _recordsCollection.DeleteOneAsync(id);
+        }
     }
 }

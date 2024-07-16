@@ -3,8 +3,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using FinPlus.Domain.Sources;
-    using FinPlus.Domain.Users.Drop;
-    using FinPlus.Domain.Users.Trafer;
     using FinPlus.Infrastructure.Models;
     using Microsoft.Extensions.Options;
     using MongoDB.Bson;
@@ -25,6 +23,11 @@
         {
             await _sourceCollection.InsertOneAsync(source);
             return;
+        }
+
+        public async Task DeleteSource(string id)
+        {
+            await _sourceCollection.DeleteOneAsync(id);
         }
 
         public async Task<List<Source>> GetAllSourceByPartName(string partName)

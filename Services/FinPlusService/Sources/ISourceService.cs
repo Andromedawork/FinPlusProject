@@ -20,5 +20,7 @@
         public Task<decimal> GetSoureProfitInMonth(string id, DateTime startDate, DateTime endDate);
 
         public Task<List<Drop>> GetAllMyDrops(string id);
+
+        public Task DeleteSource(string id);
     }
 }

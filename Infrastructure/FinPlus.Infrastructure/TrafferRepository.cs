@@ -1,6 +1,5 @@
 ﻿namespace FinPlus.Infrastructure
 {
-    using FinPlus.Domain.Users.Drop;
     using FinPlus.Domain.Users.Trafer;
     using FinPlus.Infrastructure.Models;
     using Microsoft.Extensions.Options;
@@ -70,6 +69,11 @@
         public async Task<Traffer> GetTrafferByLogin(string login)
         {
             return await _trafferCollection.Find(t => t.Login == login).FirstOrDefaultAsync();
+        }
+
+        public async Task DeleteTraffer(string id)
+        {
+            await _trafferCollection.DeleteOneAsync(id);
         }
     }
 }

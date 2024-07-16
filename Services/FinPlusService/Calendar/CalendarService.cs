@@ -37,5 +37,10 @@
 
             return dropRecords;
         }
+
+        public async Task DeleteRecord(string id)
+        {
+            await _calendarRepository.DeleteRecords(id);
+        }
     }
 }

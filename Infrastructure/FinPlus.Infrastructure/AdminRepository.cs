@@ -77,5 +77,10 @@
 
             return await GetAllAdmins();
         }
+
+        public async Task DeleteAdmin(string id)
+        {
+            await _adminCollection.DeleteOneAsync(id);
+        }
     }
 }

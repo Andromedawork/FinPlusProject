@@ -7,5 +7,7 @@
         public Task AddRecords(Records records);
 
         public Task<List<Records>> GetRecordsByDate(DateTime date);
+
+        public Task DeleteRecords(string id);
     }
 }

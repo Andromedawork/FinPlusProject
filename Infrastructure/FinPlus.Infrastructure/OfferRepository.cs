@@ -34,5 +34,10 @@
             });
             return;
         }
+
+        public async Task DeleteOffer(string id)
+        {
+            await _offersCollection.DeleteOneAsync(id);
+        }
     }
 }

@@ -17,6 +17,11 @@
             await _sourcesRepository.AddSource(source);
         }
 
+        public async Task DeleteSource(string id)
+        {
+            await _sourcesRepository.DeleteSource(id);
+        }
+
         public async Task<List<Drop>> GetAllMyDrops(string id)
         {
             List<Drop> result = new List<Drop>();

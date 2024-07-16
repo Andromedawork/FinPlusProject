@@ -17,5 +17,7 @@
         public Task<bool> UpdateDropFinance(string id, bool moneyStatus, DropCategory category, int point, decimal revenuePotential, decimal profitPotential, decimal payment);
 
         public Task<List<Drop>> GetAllDropsByPartName(string partName);
+
+        public Task DeleteDrop(string id);
     }
 }

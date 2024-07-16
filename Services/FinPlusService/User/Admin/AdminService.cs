@@ -36,5 +36,10 @@
         {
             return await _adminRepository.GetAllAdminsByPartName(partName);
         }
+
+        public async Task DeleteAdmin(string id)
+        {
+            await _adminRepository.DeleteAdmin(id);
+        }
     }
 }
