@@ -130,5 +130,32 @@
 
             return View("EditTraffer", traffer);
         }
+
+        public async Task<IActionResult> SearchTraffer(string partName)
+        {
+            var traffers = await _trafferService.GetTrafferByPartName(partName);
+            List<TrafferModel> model = new List<TrafferModel>();
+
+            foreach (var traffer in traffers)
+            {
+                TrafferModel trafferModel = new TrafferModel()
+                {
+                    Id = traffer.Id,
+                    Name = traffer.Name,
+                    Login = traffer.Login,
+                    Password = traffer.Password,
+                    ReferalId = traffer.ReferalId,
+                    MobileNumber = traffer.MobileNumber,
+                    Level = traffer.Level,
+                    Bet = traffer.Bet,
+                    Revenue = await _trafferService.GetTrafferRevenue(traffer.Id),
+                    ProfitInMonth = await _trafferService.GetTrafferProfitInMonth(traffer.Id, DateTime.Now.Month),
+                };
+
+                model.Add(trafferModel);
+            }
+
+            return View("Index", model);
+        }
     }
 }

@@ -106,13 +106,17 @@
 
         public async Task<List<Drop>> GetAllDropsByPartName(string partName)
         {
-            var filter = Builders<Drop>.Filter.Or(
-            Builders<Drop>.Filter.Regex("Name.Surname", new BsonRegularExpression(partName, "i")),
-            Builders<Drop>.Filter.Regex("Name.Name", new BsonRegularExpression(partName, "i")),
-            Builders<Drop>.Filter.Regex("Name.Patronymic", new BsonRegularExpression(partName, "i")));
+            if (!string.IsNullOrEmpty(partName))
+            {
+                var filter = Builders<Drop>.Filter.Or(
+                Builders<Drop>.Filter.Regex("Name.Surname", new BsonRegularExpression(partName, "i")),
+                Builders<Drop>.Filter.Regex("Name.Name", new BsonRegularExpression(partName, "i")),
+                Builders<Drop>.Filter.Regex("Name.Patronymic", new BsonRegularExpression(partName, "i")));
+                var results = await _dropsCollection.Find(filter).ToListAsync();
+                return results;
+            }
 
-            var results = await _dropsCollection.Find(filter).ToListAsync();
-            return results;
+            return await GetAllDrops();
         }
     }
 }

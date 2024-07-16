@@ -53,13 +53,18 @@
 
         public async Task<List<Traffer>> GetAllTraffersByPartName(string partName)
         {
-            var filter = Builders<Traffer>.Filter.Or(
-            Builders<Traffer>.Filter.Regex("Name.Surname", new BsonRegularExpression(partName, "i")),
-            Builders<Traffer>.Filter.Regex("Name.Name", new BsonRegularExpression(partName, "i")),
-            Builders<Traffer>.Filter.Regex("Name.Patronymic", new BsonRegularExpression(partName, "i")));
+            if (!string.IsNullOrEmpty(partName))
+            {
+                var filter = Builders<Traffer>.Filter.Or(
+                Builders<Traffer>.Filter.Regex("Name.Surname", new BsonRegularExpression(partName, "i")),
+                Builders<Traffer>.Filter.Regex("Name.Name", new BsonRegularExpression(partName, "i")),
+                Builders<Traffer>.Filter.Regex("Name.Patronymic", new BsonRegularExpression(partName, "i")));
 
-            var results = await _trafferCollection.Find(filter).ToListAsync();
-            return results;
+                var results = await _trafferCollection.Find(filter).ToListAsync();
+                return results;
+            }
+
+            return await GetAllTrafers();
         }
 
         public async Task<Traffer> GetTrafferByLogin(string login)

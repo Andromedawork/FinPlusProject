@@ -7,5 +7,7 @@
         public Task<List<Drop>> GetAllDrops();
 
         public Task AddDrop(Drop drop);
+
+        public Task<List<Drop>> GetAllDropsByPartName(string partName);
     }
 }

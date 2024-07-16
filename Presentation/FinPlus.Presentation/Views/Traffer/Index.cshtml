@@ -16,8 +16,8 @@
     <div class="container">
         <div class="header">Рефоводы</div>
         <div class="search-form">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
+            <form asp-controller="Traffer" asp-action="SearchTraffer" method="post" class="form-inline">
+                <input id="partName" name="partName" class="form-control mr-sm-2" type="search" placeholder="Поиск" aria-label="Search">
                 <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Найти</button>
             </form>
         </div>

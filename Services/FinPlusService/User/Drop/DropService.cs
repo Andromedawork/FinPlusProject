@@ -20,5 +20,10 @@
         {
             await _dropRepository.AddDrop(drop);
         }
+
+        public async Task<List<Drop>> GetAllDropsByPartName(string partName)
+        {
+            return await _dropRepository.GetAllDropsByPartName(partName);
+        }
     }
 }

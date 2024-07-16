@@ -58,5 +58,12 @@
 
             return View();
         }
+
+        public async Task<IActionResult> SearchClient(string partName)
+        {
+            List<DropModel> model = new List<DropModel>();
+            var drops = await _dropService.GetAllDropsByPartName(partName);
+            return View("Index", model);
+        }
     }
 }

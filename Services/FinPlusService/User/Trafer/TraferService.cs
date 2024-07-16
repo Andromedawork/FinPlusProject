@@ -47,5 +47,10 @@
 
             return profit;
         }
+
+        public async Task<List<Traffer>> GetTrafferByPartName(string partName)
+        {
+            return await _trafferRepository.GetAllTraffersByPartName(partName);
+        }
     }
 }
