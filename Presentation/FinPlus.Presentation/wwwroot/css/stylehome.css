@@ -1,11 +1,11 @@
-﻿body, html {
+﻿body {
     height: 100%;
     margin: 0;
     font-family: Arial, sans-serif;
+    background-image: url('../photo/');
 }
 
 .background {
-    background-image: url('path/to/your/background-image.jpg'); /* Замените на путь к вашему изображению */
     background-size: cover;
     background-position: center;
     position: relative;
@@ -23,7 +23,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); /* Полупрозрачный черный цвет */
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
 .content {
@@ -39,9 +39,22 @@
 .finplus {
     font-size: 4em;
     font-weight: bold;
-    background: linear-gradient(45deg, #00f, #f0f, #0ff, #0f0, #ff0, #f00, #00f);
+    background: linear-gradient(45deg, #0000ff, #00bfff, #1e90ff, #4169e1, #6495ed, #0000ff);
     background-size: 400%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     animation: gradient 5s infinite linear;
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
