@@ -10,6 +10,8 @@
 
         public Task<Admin> GetAdminById(string id);
 
+        public Task<Admin> GetAdminByOrganisationId(string id);
+
         public Task<List<Admin>> GetAllAdminsByPartName(string partName);
 
         public Task<bool> UpdateAdmin(Admin admin);

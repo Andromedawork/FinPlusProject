@@ -82,5 +82,10 @@
         {
             await _adminCollection.DeleteOneAsync(id);
         }
+
+        public async Task<Admin> GetAdminByOrganisationId(string id)
+        {
+            return await _adminCollection.Find(a => a.OrganisationId == id).FirstOrDefaultAsync();
+        }
     }
 }

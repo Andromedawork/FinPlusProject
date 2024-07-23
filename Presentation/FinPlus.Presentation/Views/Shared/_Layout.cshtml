@@ -22,6 +22,10 @@
                 <a class="nav-link" asp-area="" asp-controller="Offer" asp-action="Index">Офферы</a>
                 <a class="nav-link" asp-area="" asp-controller="Calendar" asp-action="Index">Календарь</a>
                 <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Администрация</a>
+                @if (ViewBag.UserRole == "MainAdmin")
+                {
+                    <a class="nav-link" asp-area="" asp-controller="Organisation" asp-action="Index">Организации</a>
+                }
             }
             else if (ViewBag.UserRole == "Manager")
             {

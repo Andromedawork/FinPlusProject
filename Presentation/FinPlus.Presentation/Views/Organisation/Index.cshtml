@@ -1,0 +1,45 @@
+﻿@using FinPlus.Presentation.Models;
+@model List<OrganisationModel>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Организации</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/styletable.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/stylebtn.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="container">
+        <div class="header">Организации</div>
+        <div class="table-container">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Главный администратор</th>
+                        <th>Номер ГА</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var organisation in Model)
+                    {
+                        <tr>
+                            <td>@organisation.Name.</td>
+                            <td>@organisation.MainAdmin.Name.ToString()</td>
+                            <td>@organisation.MainAdmin.MobileNumber</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a class="nav-link text-secondary" asp-controller="Organisation" asp-action="AddOrganisation">Добавить+</a>
+        </div>
+    </div>
+</body>
+</html>
+
+

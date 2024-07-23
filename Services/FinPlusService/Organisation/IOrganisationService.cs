@@ -1,6 +1,8 @@
-﻿namespace FinPlus.Domain.Organisations
+﻿namespace FinPlusService.Organisation
 {
-    public interface IOrganisationsRepository
+    using FinPlus.Domain.Organisations;
+
+    public interface IOrganisationService
     {
         public Task<List<Organisation>> GetAllOrganisations();
 

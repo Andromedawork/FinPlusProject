@@ -1,0 +1,54 @@
+﻿@model FinPlus.Presentation.Models.OrganisationModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить организацию</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Добавить организацию</h2>
+        <form asp-action="AddOrganisation" method="post">
+            <div class="form-group">
+                <input asp-for="Id" class="form-control" hidden />
+            </div>
+            <div class="form-group">
+                <label asp-for="Name">Название</label>
+                <input asp-for="Name" class="form-control" />
+            </div>
+            <h2>Добавить администратора организации</h2>
+            <div class="mb-3">
+                <label id="fio" class="form-label">ФИО</label>
+                <input id="fio" name="fio" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="MainAdmin.Login" class="form-label">Логин</label>
+                <input asp-for="MainAdmin.Login" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="MainAdmin.Password" class="form-label">Пароль</label>
+                <input asp-for="MainAdmin.Password" type="password" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="MainAdmin.MobileNumber" class="form-label">Номер телефона</label>
+                <input asp-for="MainAdmin.MobileNumber" type="tel" class="form-control phone" placeholder="Номер телефона" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="MainAdmin.Role" class="form-label">Уровень</label>
+                <select asp-for="MainAdmin.Role" class="form-control" disabled>
+                    <option value="1" selected>Admin</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>
+

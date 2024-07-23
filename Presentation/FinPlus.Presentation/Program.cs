@@ -10,6 +10,7 @@ using FinPlus.Infrastructure.Models;
 using FinPlusService;
 using FinPlusService.Calendar;
 using FinPlusService.DefualtBet;
+using FinPlusService.Organisation;
 using FinPlusService.Sources;
 using FinPlusService.User.Auth;
 
@@ -35,6 +36,7 @@ builder.Services.AddSingleton<IDefaultBetService, DefaultBetService>();
 builder.Services.AddSingleton<IAuthService, AuthService>();
 builder.Services.AddSingleton<ISourceRepository, SourceRepository>();
 builder.Services.AddSingleton<ISourceService, SourceService>();
+builder.Services.AddSingleton<IOrganisationService, OrganisationService>();
 
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>

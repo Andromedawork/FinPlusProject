@@ -49,6 +49,7 @@
                 <input asp-for="Bet" class="form-control" required />
             </div>
             <button type="submit" class="btn btn-primary">Сохранить</button>
+            <a class="nav-link text-danger" asp-controller="Traffer" asp-action="DeleteTraffer" asp-route-id="@Model.Id">Удалить</a>
         </form>
     </div>
 

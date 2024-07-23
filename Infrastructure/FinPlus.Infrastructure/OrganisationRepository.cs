@@ -1,6 +1,7 @@
 ﻿namespace FinPlus.Infrastructure
 {
     using FinPlus.Domain.Organisations;
+    using FinPlus.Domain.Users.Admin;
     using FinPlus.Infrastructure.Models;
     using Microsoft.Extensions.Options;
     using MongoDB.Bson;
@@ -30,6 +31,33 @@
                 Name = organisation.Name,
             });
             return;
+        }
+
+        public async Task<Organisation> GetOrganisationById(string id)
+        {
+            return await _organisationsCollection.Find(o => o.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> UpdateOrganisation(Organisation organisation)
+        {
+            var filter = Builders<Organisation>.Filter.Eq(o => o.Id, organisation.Id);
+            var update = Builders<Organisation>.Update
+            .Set(o => o.Name, organisation.Name)
+            .Set(o => o.MainAdminId, organisation.MainAdminId);
+
+            var updateResult = await _organisationsCollection.UpdateOneAsync(filter, update);
+
+            return updateResult.ModifiedCount > 1;
+        }
+
+        public async Task<Organisation> GetOrganisationByName(string name)
+        {
+            return await _organisationsCollection.Find(o => o.Name == name).FirstOrDefaultAsync();
+        }
+
+        public async Task DeleteOrganisation(string id)
+        {
+            await _organisationsCollection.DeleteOneAsync(id);
         }
     }
 }
