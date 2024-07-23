@@ -1,16 +1,19 @@
 ﻿namespace FinPlus.Presentation.Controllers
 {
     using FinPlus.Presentation.Models;
+    using FinPlusService;
     using FinPlusService.User.Auth;
     using Microsoft.AspNetCore.Mvc;
 
     public class AuthController : Controller
     {
         private readonly IAuthService _authService;
+        private readonly IAdminService _adminService;
 
-        public AuthController(IAuthService authService)
+        public AuthController(IAuthService authService, IAdminService adminService)
         {
             _authService = authService;
+            _adminService = adminService;
         }
 
         public IActionResult Index(AuthModel model)
@@ -34,6 +37,13 @@
             if (role != null)
             {
                 HttpContext.Session.SetString("Role", role);
+
+                if (role == "Admin")
+                {
+                    var admin = await _adminService.GetAdminByLogin(model.Login);
+                    HttpContext.Session.SetString("OrganisationId", admin.OrganisationId);
+                }
+
                 return RedirectToAction("Index", "Home");
             }
 

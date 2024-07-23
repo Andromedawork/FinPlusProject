@@ -75,7 +75,7 @@
             };
 
             model.ReferalId = "001";
-            string orgId = "000";
+            var orgId = HttpContext.Session.GetString("OrganisationId");
             TrafferBet bet = new TrafferBet()
             {
                 Bet = await _defaultBetService.GetDefaultBetByOrganisationId(orgId),
@@ -90,6 +90,7 @@
                 MobileNumber = model.MobileNumber,
                 Level = model.Level,
                 Bet = bet,
+                OrganisationId = orgId,
             };
 
             await _trafferService.AddTraffer(trafer);

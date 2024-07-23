@@ -48,7 +48,8 @@
             };
 
             admin.Name = fio;
-            admin.OrganisationId = "000";
+            var orgId = HttpContext.Session.GetString("OrganisationId");
+            admin.OrganisationId = orgId;
             await _adminService.AddAdmin(admin);
             return RedirectToAction("Index");
         }

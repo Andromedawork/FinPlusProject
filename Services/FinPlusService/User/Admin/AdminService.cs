@@ -46,5 +46,10 @@
         {
             return await _adminRepository.GetAdminByOrganisationId(id);
         }
+
+        public async Task<Admin> GetAdminByLogin(string login)
+        {
+            return await _adminRepository.GetAdminByLogin(login);
+        }
     }
 }
