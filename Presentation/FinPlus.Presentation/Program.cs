@@ -23,6 +23,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSingleton<IDropRepository, DropRepository>();
 builder.Services.AddSingleton<IOfferRepository, OfferRepository>();
+builder.Services.AddSingleton<IOfferService, OfferService>();
 builder.Services.AddSingleton<ITrafferRepository, TrafferRepository>();
 builder.Services.AddSingleton<IOrganisationsRepository, OrganisationRepository>();
 builder.Services.AddSingleton<IDefaultBetRepository, DefaultBetRepository>();

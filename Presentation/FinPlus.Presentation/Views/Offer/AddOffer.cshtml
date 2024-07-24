@@ -1,4 +1,4 @@
-﻿@model FinPlus.Presentation.Models.OfferModel
+﻿@model FinPlus.Domain.Offers.Offer
 
 <!DOCTYPE html>
 <html lang="ru">
@@ -11,7 +11,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Создать Оффер</h1>
-        <form asp-action="CreateOffer" method="post">
+        <form asp-action="AddOffer" method="post">
             <div class="mb-3">
                 <label asp-for="Type" class="form-label">Тип</label>
                 <select asp-for="Type" class="form-control">
@@ -27,11 +27,11 @@
             </div>
             <div class="mb-3">
                 <label asp-for="Profit" class="form-label">Прибыль</label>
-                <input asp-for="Profit" class="form-control" type="number" step="0.01" />
+                <input asp-for="Profit" class="form-control" type="number" step="100" />
             </div>
             <div class="mb-3">
                 <label asp-for="TargetAction" class="form-label">Целевое Действие</label>
-                <input asp-for="TargetAction" class="form-control" type="number" step="0.01" />
+                <input asp-for="TargetAction" class="form-control" type="number" step="100" />
             </div>
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>

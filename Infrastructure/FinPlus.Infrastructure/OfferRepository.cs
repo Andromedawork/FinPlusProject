@@ -39,5 +39,10 @@
         {
             await _offersCollection.DeleteOneAsync(id);
         }
+
+        public async Task<Offer> GetOfferById(string id)
+        {
+            return await _offersCollection.Find(o => o.Id == id).FirstOrDefaultAsync();
+        }
     }
 }
