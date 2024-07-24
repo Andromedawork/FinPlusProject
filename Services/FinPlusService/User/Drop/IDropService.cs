@@ -10,6 +10,12 @@
 
         public Task<List<Drop>> GetAllDropsByPartName(string partName);
 
+        public Task<string> GetPartner(string id);
+
+        public Task<string> GetSubPartner(string id);
+
+        public Task<string> GetSource(string id);
+
         public Task DeleteDrop(string id);
     }
 }

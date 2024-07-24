@@ -10,7 +10,7 @@
 
         public Task<Drop> GetDropById(string id);
 
-        public Task<bool> UpdateDropData(string id, FIO name, string referalId, DropPassport pass, string mobileNumber, string cardNumber, string personalReferalId, DateTime dateOfBirth);
+        public Task<bool> UpdateDropData(string id, FIO name, string referalId, DropPassport pass, string mobileNumber, string cardNumber, string personalReferalId, DateTime dateOfBirth, string telegram);
 
         public Task<bool> UpdateDropStep(string id, Dictionary<DateTime, DropStep> step, List<Offer> offers, Dictionary<DropStep, string> comments);
 

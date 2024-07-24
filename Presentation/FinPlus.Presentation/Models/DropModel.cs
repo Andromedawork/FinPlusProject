@@ -11,13 +11,9 @@
 
         public string? Source { get; set; }
 
-        public string? PartnerId { get; set; }
-
         public string? Partner { get; set; }
 
         public string? SubPartner { get; set; }
-
-        public string? SubPartnerId { get; set; }
 
         public string? MobileNumber { get; set; }
 

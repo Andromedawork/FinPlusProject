@@ -38,6 +38,8 @@
 
         public string? PersonalReferalId { get; set; }
 
+        public string? Telegram { get; set; }
+
         public Dictionary<DateTime, DropStep>? Steps { get; set; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]

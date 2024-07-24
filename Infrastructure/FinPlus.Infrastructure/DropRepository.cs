@@ -57,7 +57,7 @@
             return await _dropsCollection.Find(d => d.Id == id).FirstOrDefaultAsync();
         }
 
-        public async Task<bool> UpdateDropData(string id, FIO name, string referalId, DropPassport pass, string mobileNumber, string cardNumber, string personalReferalId, DateTime dateOfBirth)
+        public async Task<bool> UpdateDropData(string id, FIO name, string referalId, DropPassport pass, string mobileNumber, string cardNumber, string personalReferalId, DateTime dateOfBirth, string telegram)
         {
             var filter = Builders<Drop>.Filter.Eq(d => d.Id, id);
             var update = Builders<Drop>.Update
@@ -67,6 +67,7 @@
                 .Set(d => d.MobileNumber, mobileNumber)
                 .Set(d => d.CardNumber, cardNumber)
                 .Set(d => d.PersonalReferalId, personalReferalId)
+                .Set(d => d.Telegram, telegram)
                 .Set(d => d.DateOfBirth, dateOfBirth);
 
             var updateResult = await _dropsCollection.UpdateOneAsync(filter, update);

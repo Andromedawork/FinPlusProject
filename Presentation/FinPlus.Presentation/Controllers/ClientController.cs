@@ -26,6 +26,26 @@
             {
                 var drops = await _dropService.GetAllDrops();
                 List<DropModel> model = new List<DropModel>();
+                foreach (var drop in drops)
+                {
+                    DropModel dropModel = new DropModel()
+                    {
+                        Name = drop.Name.ToString(),
+                        Partner = await _dropService.GetPartner(drop.ReferalId),
+                        SubPartner = await _dropService.GetSubPartner(drop.ReferalId),
+                        Source = await _dropService.GetPartner(drop.ReferalId),
+                        MobileNumber = drop.MobileNumber,
+                        Telegram = drop.Telegram,
+                        Pass = drop.Pass.ToString(),
+                        CardNumber = drop.CardNumber,
+                        DateOfBirth = drop.DateOfBirth,
+                        Date = drop.Steps.Keys.First(),
+                        ProfitPotencial = drop.ProfitPotencial,
+                        RevenuePotential = drop.RevenuePotential,
+                    };
+                    model.Add(dropModel);
+                }
+
                 return View(model);
             }
             catch (Exception ex)
