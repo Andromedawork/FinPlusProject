@@ -26,6 +26,21 @@
             return await _offerRepository.GetAllOffers();
         }
 
+        public async Task<List<Offer>> GetAllOffersById(List<string> id)
+        {
+            List<Offer> offers = new List<Offer>();
+            if (id != null)
+            {
+                foreach (var offerId in id)
+                {
+                    Offer offer = await _offerRepository.GetOfferById(offerId);
+                    offers.Add(offer);
+                }
+            }
+
+            return offers;
+        }
+
         public async Task<Offer> GetOfferById(string id)
         {
             return await _offerRepository.GetOfferById(id);

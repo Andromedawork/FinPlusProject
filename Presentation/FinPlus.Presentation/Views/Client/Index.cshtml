@@ -25,11 +25,10 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Источник</th>
                         <th>Рефовод</th>
                         <th>ФИО</th>
                         <th>Телефон</th>
+                        <th>Телеграмм</th>
                         <th>Прибыль потенциальная</th>
                         <th>Прибыль в холде</th>
                         <th>Дата</th>
@@ -40,14 +39,13 @@
                    @foreach(var drop in Model)
                    {
                         <tr>
-                            <td>@drop.Id</td>
-                            <td>@drop.Source</td>
                             <td>@drop.Partner</td>
                             <td>@drop.Name</td>
                             <td>@drop.MobileNumber</td>
+                            <td>@drop.Telegram</td>
                             <td>@drop.ProfitPotencial</td>
                             <td>@drop.RevenuePotential</td>
-                            <td>@drop.Date</td>
+                            <td>@drop.Date.ToString("dd.MM.yy")</td>
                             <td>
                                 <a class="nav-link text-secondary" asp-controller="Client" asp-action="EditClient" asp-route-id="@drop.Id">Ред.</a>
                             </td>

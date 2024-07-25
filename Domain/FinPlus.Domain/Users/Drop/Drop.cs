@@ -16,7 +16,7 @@
 
         public DropPassport? Pass { get; set; }
 
-        public List<Offer> Offers { get; set; } = new List<Offer>(0);
+        public Dictionary<string, List<Offer>>? Offers { get; set; }
 
         public bool MoneyStatus { get; set; }
 
@@ -40,7 +40,7 @@
 
         public string? Telegram { get; set; }
 
-        public Dictionary<DateTime, DropStep>? Steps { get; set; }
+        public Dictionary<string, DropStep>? Steps { get; set; }
 
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime DateOfBirth { get; set; }
@@ -52,6 +52,6 @@
         [BsonDateTimeOptions(Kind = DateTimeKind.Utc)]
         public DateTime DateEnd { get; set; }
 
-        public Dictionary<DropStep, string>? Comments { get; set; }
+        public List<string>? Comments { get; set; }
     }
 }

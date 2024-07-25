@@ -21,39 +21,36 @@
     margin: 0 auto;
 }
 
-.container th h1 {
-    font-weight: bold;
-    text-align: center;
-    font-size: 1em;
-    color: #185875;
-}
-
-.container td {
-    text-align: center;
-    font-weight: normal;
-    font-size: 1em;
-    -webkit-box-shadow: 0 2px 2px -2px #0E1119;
-    -moz-box-shadow: 0 2px 2px -2px #0E1119;
-    box-shadow: 0 2px 2px -2px #0E1119;
-    background-color: #FFF;
-    color: #000;
-}
-
 .container {
     text-align: left;
     overflow: hidden;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     display: table;
     padding: 0 0 8em 0;
+    table-layout: auto; /* Обеспечивает, что ширина ячеек определяется их содержимым */
 }
 
-    .container td, .container th {
+    .container th, .container td {
         padding-bottom: 0.65%; /* Уменьшение значения padding для уменьшения высоты ячеек */
         padding-top: 0.65%; /* Уменьшение значения padding для уменьшения высоты ячеек */
         padding-left: 2%;
         text-align: center;
+        min-width: 130px; /* Минимальная ширина ячеек */
+        max-width: 300px; /* Максимальная ширина ячеек */
+        -webkit-box-shadow: 0 2px 2px -2px #0E1119;
+        -moz-box-shadow: 0 2px 2px -2px #0E1119;
+        box-shadow: 0 2px 2px -2px #0E1119;
+        background-color: #FFF;
+        color: #000;
     }
+
+        .container th h1 {
+            font-weight: bold;
+            text-align: center;
+            font-size: 1em;
+            color: #185875;
+        }
 
     .container tr:hover {
         background-color: #185875;

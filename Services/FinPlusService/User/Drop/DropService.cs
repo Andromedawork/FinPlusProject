@@ -1,5 +1,7 @@
 ﻿namespace FinPlusService
 {
+    using FinPlus.Domain.Offers;
+    using FinPlus.Domain.Users;
     using FinPlus.Domain.Users.Drop;
     using FinPlusService.Sources;
 
@@ -21,6 +23,11 @@
         public async Task<List<Drop>> GetAllDrops()
         {
             return await _dropRepository.GetAllDrops();
+        }
+
+        public async Task<Drop> GetDropById(string id)
+        {
+            return await _dropRepository.GetDropById(id);
         }
 
         public async Task AddDrop(Drop drop)
@@ -72,6 +79,31 @@
             }
 
             return source.Name;
+        }
+
+        public async Task<bool> UpdateDropData(string id, FIO name, string referalId, DropPassport pass, string mobileNumber, string cardNumber, string personalReferalId, DateTime dateOfBirth, string telegram)
+        {
+            return await _dropRepository.UpdateDropData(id, name, referalId, pass, mobileNumber, cardNumber, personalReferalId, dateOfBirth, telegram);
+        }
+
+        public async Task<bool> UpdateDropStep(string id, int step, List<Offer> offers, string comments)
+        {
+            Dictionary<string, DropStep> steps = new Dictionary<string, DropStep>()
+            {
+                {
+                    DateTime.Now.ToString(), (DropStep)step
+                },
+            };
+
+            DropStep dStep = (DropStep)step;
+
+            Dictionary<string, List<Offer>> offer = new Dictionary<string, List<Offer>>()
+            {
+                {
+                    dStep.ToString(), offers
+                },
+            };
+            return await _dropRepository.UpdateDropStep(id, steps, offer, comments);
         }
     }
 }

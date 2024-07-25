@@ -6,6 +6,8 @@
     {
         public Task<List<Offer>> GetAllOffers();
 
+        public Task<List<Offer>> GetAllOffersById(List<string> id);
+
         public Task<Offer> GetOfferById(string id);
 
         public Task AddOffer(Offer offer);

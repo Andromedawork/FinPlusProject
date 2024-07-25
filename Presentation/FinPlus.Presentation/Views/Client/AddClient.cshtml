@@ -20,20 +20,17 @@
                 <input asp-for="Name" class="form-control" required />
             </div>
             <div class="mb-3">
-                <label asp-for="Source" class="form-label">Источник</label>
-                <input asp-for="Source" class="form-control" required />
-            </div>
-            <div class="mb-3">
                 <label asp-for="Partner" class="form-label">Партнер</label>
-                <input asp-for="Partner" class="form-control" required />
-            </div>
-            <div class="mb-3">
-                <label asp-for="SubPartner" class="form-label">СубПартнер</label>
-                <input asp-for="SubPartner" class="form-control" required />
+                <select asp-for="Partner" class="form-control">
+                    @foreach (var partner in Model.AllTraffers)
+                    {
+                        <option value="@partner.Id">@partner.Name.ToString()</option>
+                    }
+                </select>
             </div>
             <div class="mb-3">
                 <label asp-for="MobileNumber" class="form-label">Номер телефона</label>
-                <input type="tel" class="form-control phone" asp-for="MobileNumber" required />
+                <input type="tel" class="form-control phone" id="mobileNumber" name="mobileNumber" placeholder="Номер телефона" asp-for="MobileNumber" required />
             </div>
             <div class="mb-3">
                 <label asp-for="Telegram" class="form-label">Telegram</label>
@@ -44,38 +41,32 @@
                 <input asp-for="Pass" class="form-control" required />
             </div>
             <div class="mb-3">
-                    <label asp-for="CardNumber" class="form-label">Номер счета</label>
-                    <input asp-for="CardNumber" class="form-control" required />
+                <label asp-for="CardNumber" class="form-label">Номер счета</label>
+                <input asp-for="CardNumber" class="form-control" required />
             </div>
             <div class="mb-3">
                 <label asp-for="DateOfBirth" class="form-label">Дата рождения</label>
                 <input asp-for="DateOfBirth" type="date" class="form-control" required />
             </div>
+            <h2 class="mb-4" style="border-bottom: 2px solid;">Первый контакт</h2>
+            <div class="mb-3">
+                <div class="control-group">
+                    <label asp-for="Offers">Офферы оформленные:</label>
+                    <select asp-for="Offers" id="Offers" multiple name="Offers" class="demo-default">
+                        <option value="">Выберите офферы</option>
+                        @foreach (var offer in Model.AllOffers)
+                        {
+                            <option value="@offer.Id">@offer.Type-@offer.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Заметки</label>
+                <textarea for="comment" id="comment" name="comment" class="form-control" rows="4"></textarea>
+            </div>
             <button type="submit" class="btn btn-primary">Сохранить</button>
         </form>
-        <div class="container mt-5">
-            <h2 class="mb-4" style="border-bottom: 2px solid;">Первый контакт</h2>
-            <form asp-action="FirstContact" method="post">
-                <div class="mb-3">
-                    <div class="control-group">
-                        <label for="select-state">Офферы оформленные:</label>
-                        <select id="select-state" multiple name="state[]" class="demo-default">
-                            <option value="">Выберите офферы</option>
-                            <option value="credit-svoi">Кредит УралСиб</option>
-                            <option value="alfa-ip">Альфа ИП</option>
-                            <option value="credit-vtb">Кредит ВТБ</option>
-                            <option value="credit-tinkoff">Кредит Тинькофф</option>
-                            <option value="rko">РКО</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <label class="form-label">Заметки</label>
-                    <textarea class="form-control" rows="4"></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Сохранить</button>
-            </form>
-        </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js" integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -83,4 +74,3 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>
-

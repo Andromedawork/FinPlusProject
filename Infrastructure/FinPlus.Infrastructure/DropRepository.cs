@@ -26,29 +26,7 @@
 
         public async Task AddDrop(Drop drop)
         {
-            await _dropsCollection.InsertOneAsync(new Drop
-            {
-                Name = drop.Name,
-                ReferalId = drop.ReferalId,
-                Pass = drop.Pass,
-                Offers = drop.Offers,
-                MoneyStatus = drop.MoneyStatus,
-                DropCategory = drop.DropCategory,
-                Point = drop.Point,
-                RevenuePotential = drop.RevenuePotential,
-                ProfitPotencial = drop.ProfitPotencial,
-                TrafferProfitPotencial = drop.TrafferProfitPotencial,
-                Payment = drop.Payment,
-                MobileNumber = drop.MobileNumber,
-                CardNumber = drop.CardNumber,
-                PersonalReferalId = drop.PersonalReferalId,
-                Steps = drop.Steps,
-                DateOfBirth = drop.DateOfBirth,
-                OrganisationId = drop.OrganisationId,
-                PaymentTransactionNumber = drop.PaymentTransactionNumber,
-                DateEnd = drop.DateEnd,
-                Comments = drop.Comments,
-            });
+            await _dropsCollection.InsertOneAsync(drop);
             return;
         }
 
@@ -75,15 +53,43 @@
             return updateResult.ModifiedCount > 0;
         }
 
-        public async Task<bool> UpdateDropStep(string id, Dictionary<DateTime, DropStep> step, List<Offer> offers, Dictionary<DropStep, string> comments)
+        public async Task<bool> UpdateDropStep(string id, Dictionary<string, DropStep> step, Dictionary<string, List<Offer>> offers, string comment)
         {
             var filter = Builders<Drop>.Filter.Eq(d => d.Id, id);
-            var update = Builders<Drop>.Update
-                .Set(d => d.Steps, step)
-                .Set(d => d.Comments, comments)
-                .Set(d => d.Offers, offers);
+            var currentDrop = await _dropsCollection.Find(filter).FirstOrDefaultAsync();
 
-            var updateResult = await _dropsCollection.UpdateOneAsync(filter, update);
+            if (currentDrop == null)
+            {
+                return false;
+            }
+
+            var updatedSteps = currentDrop.Steps;
+
+            foreach (var kvp in step)
+            {
+                updatedSteps[kvp.Key] = kvp.Value;
+            }
+
+            var updatedOffers = currentDrop.Offers;
+
+            foreach (var kvp in offers)
+            {
+                updatedOffers[kvp.Key] = kvp.Value;
+            }
+
+            var updates = new List<UpdateDefinition<Drop>>();
+
+            var stepsUpdate = Builders<Drop>.Update.Set(d => d.Steps, updatedSteps);
+            updates.Add(stepsUpdate);
+
+            var offersUpdate = Builders<Drop>.Update.Set(d => d.Offers, updatedOffers);
+            updates.Add(offersUpdate);
+
+            var commentsUpdate = Builders<Drop>.Update.Push(d => d.Comments, comment);
+            updates.Add(commentsUpdate);
+
+            var combinedUpdate = Builders<Drop>.Update.Combine(updates);
+            var updateResult = await _dropsCollection.UpdateOneAsync(filter, combinedUpdate);
 
             return updateResult.ModifiedCount > 0;
         }
