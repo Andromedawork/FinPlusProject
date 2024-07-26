@@ -102,7 +102,6 @@
                 };
 
                 var orgId = HttpContext.Session.GetString("OrganisationId");
-                model.Comment.Add(comment);
 
                 Dictionary<string, List<Offer>> offers = new Dictionary<string, List<Offer>>()
                 {
@@ -157,7 +156,7 @@
                 Date = DateTime.Parse(drop.Steps.Keys.First()),
                 ProfitPotencial = drop.ProfitPotencial,
                 RevenuePotential = drop.RevenuePotential,
-                ReceivedOffers = drop.Offers.Values.SelectMany(offerList => offerList).ToList(),
+                ReceivedOffers = drop.Offers,
                 Comment = drop.Comments,
             };
             dropModel.AllTraffers = await _traferService.GetAllTraffers();
@@ -200,15 +199,13 @@
             return RedirectToAction("EditClient", model);
         }
 
+        [HttpPost]
         public async Task<IActionResult> UpdateClientStep(DropModel model, int step)
         {
             var offers = await _offerService.GetAllOffersById(model.Offers);
-            if (await _dropService.UpdateDropStep(model.Id, step, offers, model.Comment[0]))
-            {
-                return RedirectToAction("EditClient", model);
-            }
+            bool success = await _dropService.UpdateDropStep(model.Id, step, offers, model.Comment[0]);
 
-            return RedirectToAction("Index");
+            return Json(new { success });
         }
 
         public async Task<IActionResult> SearchClient(string partName)

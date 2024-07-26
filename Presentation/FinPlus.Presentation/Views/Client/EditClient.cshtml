@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/css/selectize.default.min.css" integrity="sha512-pTaEn+6gF1IeWv3W1+7X7eM60TFu/agjgoHmYhAfLEU8Phuf6JKiiE8YmsNC0aCgQv4192s4Vai8YZ6VNM6vyQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/css/selectize.css" />
+    <link rel="stylesheet" href="~/css/stylestep.css" />
 </head>
 
 <body>
@@ -37,22 +38,22 @@
                 <label asp-for="MobileNumber" class="form-label">Номер телефона</label>
                 <input type="tel" class="form-control phone" asp-for="MobileNumber" required />
             </div>
-                <div class="mb-3">
-                    <label asp-for="Telegram" class="form-label">Telegram</label>
-                    <input asp-for="Telegram" class="form-control" required />
-                </div>
-                <div class="mb-3">
-                    <label asp-for="Pass" class="form-label">Паспортные данные</label>
-                    <input asp-for="Pass" class="form-control" required />
-                </div>
-                <div class="mb-3">
-                    <label asp-for="DateOfBirth" class="form-label">Дата рождения</label>
-                    <input asp-for="DateOfBirth" type="date" class="form-control" required />
-                </div>
-                <button type="submit" class="btn btn-primary">Изменить</button>
+            <div class="mb-3">
+                <label asp-for="Telegram" class="form-label">Telegram</label>
+                <input asp-for="Telegram" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="Pass" class="form-label">Паспортные данные</label>
+                <input asp-for="Pass" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label asp-for="DateOfBirth" class="form-label">Дата рождения</label>
+                <input asp-for="DateOfBirth" type="date" class="form-control" required />
+            </div>
+            <button type="submit" class="btn btn-primary">Изменить</button>
         </form>
 
-        <div class="container mt-5">
+        <div class="container mt-5 disabled-form">
             <h2 class="mb-4" style="border-bottom: 2px solid;">Первый контакт</h2>
             <form asp-action="FirstContact" method="post">
                 <div class="mb-3">
@@ -60,7 +61,7 @@
                         <label asp-for="Offers">Офферы оформленные:</label>
                         <select asp-for="Offers" id="Offers" multiple name="Offers" class="demo-default" disabled>
                             <option value="">Выберите офферы</option>
-                            @foreach (var offer in Model.ReceivedOffers)
+                            @foreach (var offer in Model.ReceivedOffers.Values.SelectMany(offerList => offerList).ToList())
                             {
                                 <option value="@offer.Id" selected>@offer.Type-@offer.Name</option>
                             }
@@ -69,17 +70,16 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Заметки</label>
-                    <textarea class="form-control" rows="4" disabled>@Model.Comment[0]</textarea>
+                    <textarea class="form-control" rows="4" disabled>@if (Model.Comment.Count() > 0){@Model.Comment[0]}]</textarea>
                 </div>
             </form>
         </div>
 
-
-        <div class="container mt-5">
+        <div class="container mt-5 @(Model.ReceivedOffers.ContainsKey("SecondStep") ? "disabled-form" : "")" id="second-contact">
             <h2 class="mb-4" style="border-bottom: 2px solid;">Второй контакт</h2>
-            <form asp-action="UpdateClientStep" method="post">
+            <form asp-action="UpdateClientStep" method="post" id="secondContactForm">
                 <input asp-for="Id" hidden />
-                <input for="step" id="step" name="step" type="number" value="2" hidden/>
+                <input for="step" id="step" name="step" type="number" value="2" hidden />
                 <div class="mb-3">
                     <div class="control-group">
                         <label asp-for="Offers">Офферы оформленные:</label>
@@ -87,7 +87,7 @@
                             <option value="">Выберите офферы</option>
                             @foreach (var offer in Model.AllOffers)
                             {
-                                @foreach (var recOffer in Model.ReceivedOffers)
+                                @foreach (var recOffer in Model.ReceivedOffers.Values.SelectMany(offerList => offerList).ToList())
                                 {
                                     if (offer.Id == recOffer.Id)
                                     {
@@ -101,15 +101,15 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Заметки</label>
-                    <textarea for="comment" id="comment" name="comment" class="form-control" rows="4"></textarea>
+                    <textarea for="comment" id="comment" name="comment" class="form-control" rows="4">@if (Model.Comment.Count() > 1){@Model.Comment[1]}</textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Сохранить</button>
+                <button type="submit" class="btn btn-primary" id="saveSecondStep">Сохранить</button>
             </form>
         </div>
 
-        <div class="container mt-5">
+        <div class="container mt-5 @(Model.ReceivedOffers.ContainsKey("ThirdStep") ? "disabled-form" : "hidden")" id="third-contact">
             <h2 class="mb-4" style="border-bottom: 2px solid;">Третий контакт</h2>
-            <form asp-action="UpdateClientStep" method="post">
+            <form asp-action="UpdateClientStep" method="post" id="ThirdContactForm">
                 <input asp-for="Id" hidden />
                 <input for="step" id="step" name="step" type="number" value="3" hidden />
                 <div class="mb-3">
@@ -119,7 +119,7 @@
                             <option value="">Выберите офферы</option>
                             @foreach (var offer in Model.AllOffers)
                             {
-                                @foreach (var recOffer in Model.ReceivedOffers)
+                                @foreach (var recOffer in Model.ReceivedOffers.Values.SelectMany(offerList => offerList).ToList())
                                 {
                                     if (offer.Id == recOffer.Id)
                                     {
@@ -133,20 +133,19 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Заметки</label>
-                    <textarea for="comment" id="comment" name="comment" class="form-control" rows="4"></textarea>
+                    <textarea for="comment" id="comment" name="comment" class="form-control" rows="4">@if (Model.Comment.Count() > 2){@Model.Comment[2]}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </form>
         </div>
 
         @await Html.PartialAsync("_PostBackPartial")
-
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js" integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="~/js/selectize.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/stepscript.js" asp-append-version="true"></script>
 </body>
 </html>
-

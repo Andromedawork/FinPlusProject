@@ -45,7 +45,7 @@
 
         public List<Offer>? AllOffers { get; set; }
 
-        public List<Offer>? ReceivedOffers { get; set; }
+        public Dictionary<string, List<Offer>?> ReceivedOffers { get; set; }
 
         public List<string>? Comment { get; set; }
     }
