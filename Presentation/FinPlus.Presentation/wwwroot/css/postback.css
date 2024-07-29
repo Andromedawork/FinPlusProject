@@ -1,0 +1,25 @@
+﻿.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-inline {
+    display: flex;
+    align-items: center;
+}
+
+    .form-inline label {
+        margin-right: 10px;
+    }
+
+    .form-inline select,
+    .form-inline input {
+        margin-right: 10px;
+    }
+
+table {
+    width: 100%;
+    margin-top: 20px;
+}

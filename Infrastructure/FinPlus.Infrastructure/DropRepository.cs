@@ -125,6 +125,34 @@
             return await GetAllDrops();
         }
 
+        public async Task<bool> UpdateOfferStatus(string dropId, string offerId, string date, OfferStatus newStatus)
+        {
+            var filter = Builders<Drop>.Filter.Eq(d => d.Id, dropId);
+            var drop = await _dropsCollection.Find(filter).FirstOrDefaultAsync();
+
+            if (drop == null)
+            {
+                return false;
+            }
+
+            foreach (var offerList in drop.Offers.Values)
+            {
+                var offer = offerList.FirstOrDefault(o => o.Id == offerId);
+                if (offer != null)
+                {
+                    offer.Status.Add(date, newStatus);
+
+                    var update = Builders<Drop>.Update.Set(d => d.Offers, drop.Offers);
+                    var updateResult = await _dropsCollection.UpdateOneAsync(filter, update);
+
+                    return updateResult.ModifiedCount > 0;
+                }
+            }
+
+            // Если offerId не найден в списке Offers
+            return false;
+        }
+
         public async Task DeleteDrop(string id)
         {
             await _dropsCollection.DeleteOneAsync(id);

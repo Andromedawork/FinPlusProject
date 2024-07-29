@@ -1,65 +1,53 @@
-﻿<!DOCTYPE html>
+﻿@model FinPlus.Presentation.Models.DropModel
+
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/css/postback.css" />
     <title>Postback</title>
-    <style>
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .form-inline {
-            display: flex;
-            align-items: center;
-        }
-
-            .form-inline label {
-                margin-right: 10px;
-            }
-
-            .form-inline select,
-            .form-inline input {
-                margin-right: 10px;
-            }
-
-        table {
-            width: 100%;
-            margin-top: 20px;
-        }
-    </style>
 </head>
 <body>
     <div class="container mt-5">
         <div class="header">
             <h1 class="font-weight-bold">Постбэк</h1>
-            <form class="form-inline" id="addOfferForm">
-                <label for="offer">Оффер:</label>
-                <select id="offer" class="form-control" required>
-                    <option value="alfa-ip">Альфа ИП</option>
-                    <option value="credit-svoi">Кредит Свой</option>
-                    <option value="credit-vtb">Кредит ВТБ</option>
-                    <!-- Добавьте другие варианты офферов здесь -->
+            <form asp-action="UpdateClientOffer" class="form-inline" id="addOfferForm" method="post">
+                <input asp-for="Id" id="Id" class="form-control" hidden />
+
+                <label for="offerId">Оффер:</label>
+                <select id="offerId" name="offerId" class="form-control" required>
+                    @foreach (var offer in Model.AllOffers)
+                    {
+                        <option value="@offer.Id">@offer.Type-@offer.Name</option>
+                    }
                 </select>
-                <label for="date">Дата:</label>
-                <input type="date" id="date" class="form-control" required>
-                <label for="time">Время:</label>
-                <input type="time" id="time" class="form-control" required>
+
+                <label for="dateOffer">Дата:</label>
+                <input type="date" id="dateOffer" name="dateOffer" class="form-control" required>
+
+                <label for="timeOffer">Время:</label>
+                <input type="time" id="timeOffer" name="timeOffer" class="form-control" required>
+
                 <label for="status">Статус:</label>
-                <select id="status" class="form-control" required>
-                    <option value="Ожидает">Ожидает</option>
-                    <option value="Одобрено">Одобрено</option>
-                    <option value="Отклонено">Отклонено</option>
-                    <option value="Отказано">Отказано</option>
-                    <option value="Получено">Получено</option>
-                    <option value="ЦД сделано">ЦД сделано</option>
+                <select id="status" name="status" class="form-control" required>
+                    <option value="0">Ожидает</option>
+                    <option value="1">Одобрено</option>
+                    <option value="2">Отклонено</option>
+                    <option value="3">Отказано</option>
+                    <option value="4">Получено</option>
+                    <option value="5">ЦД сделано</option>
+                    <option value="6">Отказался</option>
+                    <option value="7">На будущее</option>
+                    <option value="8">Есть</option>
+                    <option value="9">Невозможно</option>
+                    <option value="10">Потерян</option>
                 </select>
+
                 <button type="submit" class="btn btn-primary">Добавить</button>
             </form>
+
         </div>
         <table class="table table-striped">
             <thead>
@@ -71,48 +59,52 @@
                 </tr>
             </thead>
             <tbody id="offersTableBody">
-                <!-- Пример строки в таблице -->
-                <tr>
-                    <td>Альфа ИП</td>
-                    <td>2024-06-27</td>
-                    <td>14:30</td>
-                    <td>Ожидает</td>
-                </tr>
-                <!-- Новые строки будут добавляться сюда -->
+                @foreach (var offerList in Model.ReceivedOffers.Values)
+                {
+                    @foreach(var offer in offerList)
+                    {
+                        @foreach (var status in offer.Status)
+                        {
+                            <tr>
+                                <td>@offer.Type-@offer.Name</td>
+                                <td class="date-cell" data-datetime="@status.Key"></td>
+                                <td class="time-cell" data-datetime="@status.Key"></td>
+                                <td>@status.Value.GetDisplayName()</td>
+                            </tr>
+                        }
+                    }
+                }
             </tbody>
         </table>
     </div>
     <script>
-        document.getElementById('addOfferForm').addEventListener('submit', function (event) {
-            event.preventDefault();
-            var offer = document.getElementById('offer').value;
-            var date = document.getElementById('date').value;
-            var time = document.getElementById('time').value;
-            var status = document.getElementById('status').value;
+        document.addEventListener("DOMContentLoaded", function () {
+            // Функция для форматирования строки даты и времени
+            function formatDateTime(dateTimeStr) {
+                const [datePart, timePart] = dateTimeStr.split(' ');
+                return {
+                    date: datePart,
+                    time: timePart
+                };
+            }
 
-            var tableBody = document.getElementById('offersTableBody');
-            var newRow = document.createElement('tr');
+            // Обрабатываем ячейки даты
+            document.querySelectorAll('.date-cell').forEach(function (cell) {
+                const dateTimeStr = cell.getAttribute('data-datetime');
+                if (dateTimeStr) {
+                    const { date } = formatDateTime(dateTimeStr);
+                    cell.textContent = date; // Заполняем дату в ячейку
+                }
+            });
 
-            var offerCell = document.createElement('td');
-            offerCell.textContent = offer;
-            newRow.appendChild(offerCell);
-
-            var dateCell = document.createElement('td');
-            dateCell.textContent = date;
-            newRow.appendChild(dateCell);
-
-            var timeCell = document.createElement('td');
-            timeCell.textContent = time;
-            newRow.appendChild(timeCell);
-
-            var statusCell = document.createElement('td');
-            statusCell.textContent = status;
-            newRow.appendChild(statusCell);
-
-            tableBody.appendChild(newRow);
-
-            // Очистить форму
-            document.getElementById('addOfferForm').reset();
+            // Обрабатываем ячейки времени
+            document.querySelectorAll('.time-cell').forEach(function (cell) {
+                const dateTimeStr = cell.getAttribute('data-datetime');
+                if (dateTimeStr) {
+                    const { time } = formatDateTime(dateTimeStr);
+                    cell.textContent = time; // Заполняем время в ячейку
+                }
+            });
         });
     </script>
 </body>

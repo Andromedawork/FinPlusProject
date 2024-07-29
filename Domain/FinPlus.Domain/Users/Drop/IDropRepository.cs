@@ -18,6 +18,8 @@
 
         public Task<List<Drop>> GetAllDropsByPartName(string partName);
 
+        public Task<bool> UpdateOfferStatus(string dropId, string offerId, string date, OfferStatus newStatus);
+
         public Task DeleteDrop(string id);
     }
 }

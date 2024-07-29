@@ -75,10 +75,10 @@
             </form>
         </div>
 
-        <div class="container mt-5 @(Model.ReceivedOffers.ContainsKey("SecondStep") ? "disabled-form" : "")" id="second-contact">
+        <div class="container mt-5 hidden @(Model.ReceivedOffers.ContainsKey("SecondStep") ? "disabled-form" : "")" id="second-contact">
             <h2 class="mb-4" style="border-bottom: 2px solid;">Второй контакт</h2>
             <form asp-action="UpdateClientStep" method="post" id="secondContactForm">
-                <input asp-for="Id" hidden />
+                <input asp-for="Id" id="Id" class="form-control" hidden />
                 <input for="step" id="step" name="step" type="number" value="2" hidden />
                 <div class="mb-3">
                     <div class="control-group">
@@ -107,10 +107,10 @@
             </form>
         </div>
 
-        <div class="container mt-5 @(Model.ReceivedOffers.ContainsKey("ThirdStep") ? "disabled-form" : "hidden")" id="third-contact">
+        <div class="container mt-5 hidden @(Model.ReceivedOffers.ContainsKey("ThirdStep") ? "disabled-form" : "")" id="third-contact">
             <h2 class="mb-4" style="border-bottom: 2px solid;">Третий контакт</h2>
             <form asp-action="UpdateClientStep" method="post" id="ThirdContactForm">
-                <input asp-for="Id" hidden />
+                <input asp-for="Id" id="Id" class="form-control" hidden />
                 <input for="step" id="step" name="step" type="number" value="3" hidden />
                 <div class="mb-3">
                     <div class="control-group">

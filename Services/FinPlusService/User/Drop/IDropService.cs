@@ -24,6 +24,8 @@
 
         public Task<bool> UpdateDropStep(string id, int step, List<Offer> offers, string comments);
 
+        public Task<bool> UpdateDropOffer(string dropId, string offerId, DateTime date, OfferStatus status);
+
         public Task DeleteDrop(string id);
     }
 }

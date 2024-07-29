@@ -105,5 +105,11 @@
             };
             return await _dropRepository.UpdateDropStep(id, steps, offer, comments);
         }
+
+        public Task<bool> UpdateDropOffer(string dropId, string offerId, DateTime date, OfferStatus status)
+        {
+            // OfferStatus newStatus = (OfferStatus)status;
+            return _dropRepository.UpdateOfferStatus(dropId, offerId, date.ToString(), status);
+        }
     }
 }

@@ -110,6 +110,17 @@
                     },
                 };
 
+                foreach (var offerList in offers.Values)
+                {
+                    foreach (var offer in offerList)
+                    {
+                        offer.Status = new Dictionary<string, OfferStatus>()
+                        {
+                            { DateTime.Now.ToString(), OfferStatus.InProgress },
+                        };
+                    }
+                }
+
                 Drop drop = new Drop()
                 {
                     Name = fio,
@@ -127,7 +138,7 @@
                 };
 
                 await _dropService.AddDrop(drop);
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
 
             model.AllTraffers = await _traferService.GetAllTraffers();
@@ -206,6 +217,18 @@
             bool success = await _dropService.UpdateDropStep(model.Id, step, offers, model.Comment[0]);
 
             return Json(new { success });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateClientOffer(string id, string offerId, DateOnly dateOffer, TimeOnly timeOffer, OfferStatus status)
+        {
+            DateTime date = DateTime.SpecifyKind(dateOffer.ToDateTime(timeOffer), DateTimeKind.Utc).ToLocalTime();
+            await _dropService.UpdateDropOffer(id, offerId, date, status);
+            DropModel model = new DropModel()
+            {
+                Id = id,
+            };
+            return RedirectToAction("EditClient", model);
         }
 
         public async Task<IActionResult> SearchClient(string partName)

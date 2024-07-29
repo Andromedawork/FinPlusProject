@@ -19,6 +19,6 @@
 
         public string? OrganisationId { get; set; }
 
-        public OfferStatus Status { get; set; } = OfferStatus.InProgress;
+        public Dictionary<string, OfferStatus> Status { get; set; }
     }
 }
